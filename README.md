@@ -1,5 +1,7 @@
 # disco-poc-vue
 
+This is a proof-of-concept for building a library discovery UI in Vue.js.
+
 ## Project setup
 ```
 npm install
