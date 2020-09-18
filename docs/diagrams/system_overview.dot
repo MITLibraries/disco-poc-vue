@@ -1,0 +1,66 @@
+// dot docs/diagrams/system_overview.dot -Tpng > docs/diagrams/system_overview.png
+// requires installation of GraphViz (brew install graphviz)
+
+digraph D {
+  "Primo Central Discovery API" -> "TIMDEXinator";
+  "TIMDEXinator" -> "DISCO UI";
+
+  "ASpace" -> "Mario";
+  "Dome" -> "Mario";
+  "DSpace" -> "Mario";
+  "Aleph" -> "Mario" ;
+  "Alma" -> "Mario";
+  "Mario" -> "ElasticSearch";
+
+  "ElasticSearch" -> "TIMDEX API";
+  "TIMDEX API" -> "DISCO UI";
+  
+  subgraph cluster_source {
+    label = "Source Systems";
+
+    subgraph cluster_s1 {
+      label = "EAD";
+      labelloc=b
+      "ASpace";
+    }
+
+    subgraph cluster_s2 {
+      label = "Dublin Core";
+      labelloc=b
+      "DSpace";
+      "Dome";
+    }
+
+    subgraph cluster_s3 {
+      label = "MARC";
+      labelloc=b
+      "Aleph";
+      "Alma";
+    }
+
+    subgraph cluster_s4 {
+      label = "proprietary";
+      labelloc=b
+      "Primo Central Discovery API"
+    }
+  }
+
+  subgraph cluster_backend {
+    label = "Disco Backend";
+
+    "Mario"
+    "ElasticSearch"
+
+    subgraph cluster_timdex_spec {
+      label="TIMDEX Spec output"
+      labelloc=b
+      "TIMDEXinator"
+      "TIMDEX API"
+    }
+  }
+
+  subgraph cluster_frontend {
+    label = "Disco Frontend"
+    "DISCO UI"
+  }
+}
