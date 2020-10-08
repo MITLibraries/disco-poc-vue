@@ -15,6 +15,12 @@
         <Item msg="Search result item" />
         <Item msg="Search result item" />
         <Pagination msg="Pagination bar" />
+        <Record msg="Full record for display" />
+      </div>
+      <div class="sidebar">
+        <Related msg="Related libraries" />
+        <Related msg="Related items" />
+        <Related msg="Related librarians" />
       </div>
     </div>
   </div>
@@ -25,6 +31,8 @@ import Breadcrumb from "./components/Breadcrumb.vue";
 import Facet from "./components/Facet.vue";
 import Item from "./components/Item.vue";
 import Pagination from "./components/Pagination.vue";
+import Record from "./components/Record.vue";
+import Related from "./components/Related.vue";
 import SearchForm from "./components/SearchForm.vue";
 
 export default {
@@ -34,6 +42,8 @@ export default {
     Facet,
     Item,
     Pagination,
+    Record,
+    Related,
     SearchForm,
   }
 };
