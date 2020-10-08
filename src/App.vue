@@ -10,6 +10,12 @@
         <Facet msg="Publisher facet" />
         <Facet msg="Title facet" />
       </div>
+      <div class="content">
+        <Item msg="Search result item" />
+        <Item msg="Search result item" />
+        <Item msg="Search result item" />
+        <Pagination msg="Pagination bar" />
+      </div>
     </div>
   </div>
 </template>
@@ -17,6 +23,8 @@
 <script>
 import Breadcrumb from "./components/Breadcrumb.vue";
 import Facet from "./components/Facet.vue";
+import Item from "./components/Item.vue";
+import Pagination from "./components/Pagination.vue";
 import SearchForm from "./components/SearchForm.vue";
 
 export default {
@@ -24,6 +32,8 @@ export default {
   components: {
     Breadcrumb,
     Facet,
+    Item,
+    Pagination,
     SearchForm,
   }
 };
@@ -45,5 +55,12 @@ export default {
 
 .row {
   display: flex;
+  flex-direction: row;
+}
+.sidebar {
+  flex: 1 1 auto;
+}
+.content {
+  flex: 2 1 auto;
 }
 </style>
