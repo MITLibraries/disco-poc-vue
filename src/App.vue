@@ -1,17 +1,20 @@
 <template>
   <div id="app">
-    <Breadcrumb msg="This is the breadcrumb." />
     <img alt="Vue logo" src="./assets/logo.png" />
+    <Breadcrumb msg="This is the breadcrumb." />
+    <SearchForm msg="This is the search form." />
   </div>
 </template>
 
 <script>
 import Breadcrumb from "./components/Breadcrumb.vue";
+import SearchForm from "./components/SearchForm.vue";
 
 export default {
   name: "App",
   components: {
-    Breadcrumb
+    Breadcrumb,
+    SearchForm,
   }
 };
 </script>
