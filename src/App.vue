@@ -21,14 +21,19 @@
         <Related msg="Related libraries" />
         <Related msg="Related items" />
         <Related msg="Related librarians" />
+        <Related msg="Related links" />
       </div>
     </div>
+    <Help msg="This is the help area." />
+    <About msg="This is the about panel." />
   </div>
 </template>
 
 <script>
+import About from "./components/About.vue";
 import Breadcrumb from "./components/Breadcrumb.vue";
 import Facet from "./components/Facet.vue";
+import Help from "./components/Help.vue";
 import Item from "./components/Item.vue";
 import Pagination from "./components/Pagination.vue";
 import Record from "./components/Record.vue";
@@ -38,8 +43,10 @@ import SearchForm from "./components/SearchForm.vue";
 export default {
   name: "App",
   components: {
+    About,
     Breadcrumb,
     Facet,
+    Help,
     Item,
     Pagination,
     Record,
@@ -60,7 +67,9 @@ export default {
 }
 
 .component {
-  border: 5px solid black;
+  background-color: rgba(192, 192, 192, 0.5);
+  border: 0.4rem solid black;
+  margin: 0.1rem;
 }
 
 .row {
