@@ -1,8 +1,8 @@
 <template>
-  <div class="searchform component">
-    <p>{{ msg }}</p>
+  <form class="searchform component form-horizontal">
+    <div class="form-group">{{ msg }}</div>
     <SearchMetadata msg="This is the search metadata." />
-  </div>
+  </form>
 </template>
 
 <script>

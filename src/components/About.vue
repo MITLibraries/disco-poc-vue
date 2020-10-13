@@ -1,5 +1,6 @@
 <template>
-  <div class="about component">
+  <div class="about component bit">
+    <h3 class="title">About</h3>
     <p>{{ msg }}</p>
   </div>
 </template>

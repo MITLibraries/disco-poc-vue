@@ -1,6 +1,8 @@
 <template>
   <div class="button component">
-    <p>{{ msg }}</p>
+    <p>
+      <a href="#" class="btn button-primary">{{ msg }}</a>
+    </p>
   </div>
 </template>
 

@@ -1,6 +1,10 @@
 <template>
-  <div class="breadcrumb component">
-    <p>{{ msg }}</p>
+  <div class="breadcrumb component wrap-outer-breadcrumb layout-band">
+    <div class="wrap-breadcrumb" role="navigation" aria-label="breadcrumbs">
+      <div class="breadcrumbs">
+        <a href="https://libraries.mit.edu" title="MIT Libraries">{{ msg }}</a>
+      </div>
+    </div>
   </div>
 </template>
 
