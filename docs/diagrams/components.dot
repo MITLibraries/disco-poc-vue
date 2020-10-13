@@ -1,0 +1,89 @@
+// dot docs/diagrams/components.dot -Tpng > docs/diagrams/components.png
+// requires installation of GraphViz (brew install graphviz)
+
+digraph D {
+  subgraph cluster_app {
+    label = "Discovery Application"
+
+    "Breadcrumb" [
+      shape = rectangle
+    ]
+
+    subgraph cluster_search {
+      label = "SearchForm"
+
+      "SearchMetadata" [
+        shape = rectangle
+      ]
+    }
+
+    subgraph cluster_sidebar1 {
+      label = "Left sidebar div"
+      color = blue
+
+      "Facet" [
+        shape = rectangle
+        label = "Facet (1-n)"
+      ]
+    }
+
+    subgraph cluster_content {
+      label = "Content div"
+      color = blue
+
+      subgraph cluster_item {
+        label = "Item (1-3)"
+        color = black
+
+        "ItemStatus1" [
+          label = "ItemStatus"
+          shape = rectangle
+        ]
+
+        "Button1" [
+          label = "Button (1-n)"
+          shape = rectangle
+        ]
+      }
+
+      "Pagination" [
+        shape = rectangle
+      ]
+
+      subgraph cluster_record {
+        label = "Record"
+        color = black
+
+        "ItemStatus2" [
+          label = "ItemStatus"
+          shape = rectangle
+        ]
+
+        "Button2" [
+          label = "Button (1-n)"
+          shape = rectangle
+        ]
+      }
+
+    }
+
+    subgraph cluster_sidebar2 {
+      label = "Right sidebar div"
+      color = blue
+
+      "Related" [
+        shape = rectangle
+        label = "Related (1-n)"
+      ]
+    }
+
+    "Help" [
+      shape = rectangle
+    ]
+
+    "About" [
+      shape = rectangle
+    ]
+
+  }
+}
