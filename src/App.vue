@@ -5,7 +5,7 @@
     <div class="wrap-outer-content layout-band">
       <div class="wrap-content">
         <div class="layout-band">
-          <SearchForm msg="This is the search form." />
+          <SearchForm @searched="doSearch" />
         </div>
         <div class="layout-1q2q1q layout-band">
           <div class="col1q">
@@ -63,6 +63,11 @@ export default {
     Record,
     Related,
     SearchForm,
+  },
+  methods: {
+    doSearch: function(query) {
+      console.log('App has been instructed to search for _' + query + '_');
+    }
   }
 };
 </script>
