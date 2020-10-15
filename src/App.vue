@@ -1,31 +1,38 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
+  <div class="wrap-page">
+    <Header />
     <Breadcrumb msg="This is the breadcrumb." />
-    <SearchForm msg="This is the search form." />
-    <div class="row">
-      <div class="sidebar">
-        <Facet msg="Subject facet" />
-        <Facet msg="Author facet" />
-        <Facet msg="Publisher facet" />
-        <Facet msg="Title facet" />
-      </div>
-      <div class="content">
-        <Item msg="Search result item" />
-        <Item msg="Search result item" />
-        <Item msg="Search result item" />
-        <Pagination msg="Pagination bar" />
-        <Record msg="Full record for display" />
-      </div>
-      <div class="sidebar">
-        <Related msg="Related libraries" />
-        <Related msg="Related items" />
-        <Related msg="Related librarians" />
-        <Related msg="Related links" />
+    <div class="wrap-outer-content layout-band">
+      <div class="wrap-content">
+        <div class="layout-band">
+          <SearchForm msg="This is the search form." />
+        </div>
+        <div class="layout-1q2q1q layout-band">
+          <div class="col1q">
+            <Facet msg="Subject facet" />
+            <Facet msg="Author facet" />
+            <Facet msg="Publisher facet" />
+            <Facet msg="Title facet" />
+          </div>
+          <div class="content-main">
+            <Item msg="Search result item" />
+            <Item msg="Search result item" />
+            <Item msg="Search result item" />
+            <Pagination msg="Pagination bar" />
+            <Record msg="Full record for display" />
+          </div>
+          <div class="col1q-r">
+            <Related msg="Related libraries" />
+            <Related msg="Related items" />
+            <Related msg="Related librarians" />
+            <Related msg="Related links" />
+          </div>
+        </div>
+        <Help msg="This is the help area." />
+        <About msg="This is the about panel." />
       </div>
     </div>
-    <Help msg="This is the help area." />
-    <About msg="This is the about panel." />
+    <Footer />
   </div>
 </template>
 
@@ -33,6 +40,8 @@
 import About from "./components/About.vue";
 import Breadcrumb from "./components/Breadcrumb.vue";
 import Facet from "./components/Facet.vue";
+import Footer from "./components/Footer.vue"
+import Header from "./components/Header.vue";
 import Help from "./components/Help.vue";
 import Item from "./components/Item.vue";
 import Pagination from "./components/Pagination.vue";
@@ -46,6 +55,8 @@ export default {
     About,
     Breadcrumb,
     Facet,
+    Footer,
+    Header,
     Help,
     Item,
     Pagination,
@@ -57,29 +68,11 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import "./assets/css/libraries-main.min.css"
+</style>
 
+<style>
 .component {
-  background-color: rgba(192, 192, 192, 0.5);
   border: 0.4rem solid black;
-  margin: 0.1rem;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
-}
-.sidebar {
-  flex: 1 1 auto;
-}
-.content {
-  flex: 2 1 auto;
 }
 </style>
