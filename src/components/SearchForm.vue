@@ -24,7 +24,10 @@ export default {
     };
   },
   methods: {
-    newSearch () {
+    newSearch: function (event) {
+      if (event) {
+        event.preventDefault()
+      }
       this.$emit('searched', this.newSearchQuery);
     }
   },
