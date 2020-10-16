@@ -64,9 +64,15 @@ export default {
     Related,
     SearchForm,
   },
+  data() {
+    return {
+      query: ''
+    }
+  },
   methods: {
     doSearch: function(query) {
       console.log('App has been instructed to search for _' + query + '_');
+      this.query = query;
     }
   }
 };
