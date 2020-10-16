@@ -19,7 +19,8 @@
               v-for="(result, index) in results"
               v-bind:result="result"
               v-bind:index="index"
-              v-bind:key="result.id" />
+              v-bind:key="result.id"
+            />
             <Pagination msg="Pagination bar" />
             <Record msg="Full record for display" />
           </div>
@@ -42,7 +43,7 @@
 import About from "./components/About.vue";
 import Breadcrumb from "./components/Breadcrumb.vue";
 import Facet from "./components/Facet.vue";
-import Footer from "./components/Footer.vue"
+import Footer from "./components/Footer.vue";
 import Header from "./components/Header.vue";
 import Help from "./components/Help.vue";
 import Item from "./components/Item.vue";
@@ -64,23 +65,23 @@ export default {
     Pagination,
     Record,
     Related,
-    SearchForm,
+    SearchForm
   },
   data() {
     return {
       results: [],
-      query: ''
-    }
+      query: ""
+    };
   },
   methods: {
     doSearch: function(query) {
       if (query) {
-        console.log('App has been instructed to search for _' + query + '_');
+        console.log("App has been instructed to search for _" + query + "_");
         this.query = query;
         this.results = [
-          {id: 1,title:'First result'},
-          {id: 2,title:'Second result'},
-          {id: 3,title:'Third result'}
+          { id: 1, title: "First result" },
+          { id: 2, title: "Second result" },
+          { id: 3, title: "Third result" }
         ];
       }
     }
@@ -89,10 +90,8 @@ export default {
 </script>
 
 <style>
-@import "./assets/css/libraries-main.min.css"
-</style>
+@import "./assets/css/libraries-main.min.css";
 
-<style>
 .component {
   border: 0.4rem solid black;
 }
