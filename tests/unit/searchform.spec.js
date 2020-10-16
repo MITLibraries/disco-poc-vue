@@ -12,6 +12,7 @@ describe("SearchForm.vue", () => {
   it("computes newSearchQuery correctly", () => {
     // No intervention
     expect(SearchForm.computed.newSearchQuery.call({query:'foo'})).toBe('foo');
+    expect(SearchForm.computed.newSearchQuery.call({query:'Keep all these words'})).toBe('Keep all these words');
     // Trim whitespace
     expect(SearchForm.computed.newSearchQuery.call({query:'   foo   '})).toBe('foo');
     // Trim very long queries on a word boundary

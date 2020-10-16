@@ -32,7 +32,11 @@ export default {
     //
     // Regex from https://www.nfollmer.com/2016/07/06/truncate-string-word-break-javascript/
     newSearchQuery: function() {
-      return this.query.trim().substring(0,1500).replace(/\s+\S*$/,"");
+      var newQuery = this.query.trim();
+      if ( newQuery.length > 1500 ) {
+        newQuery = newQuery.substring(0,1500).replace(/\s+\S*$/,"");
+      }
+      return newQuery;
     }
   },
   components: {
