@@ -1,10 +1,14 @@
 <template>
-  <div class="searchform component form-horizontal">
-    <div class="form-group">
-      <label for="b-search-main">Search the MIT Libraries</label>
-      <input id="b-search-main" type="search" name="q" placeholder="Enter your search" v-model="query" />
-      <div><button v-on:click="newSearch">Search</button></div>
-    </div>
+  <div>
+    <form class="form-group">
+      <label for="b-search-main" class="field-label">Search the MIT Libraries</label>
+      <div class="form-horizontal">
+        <input class="field field-text form-input" id="b-search-main" type="text" name="query" placeholder="Enter your search" v-model="query" />
+        <button class="btn button-primary form-action" v-on:click="newSearch">Search</button>
+      </div>
+      <pre>Raw query: _{{ query }}_</pre>
+      <pre>Parsed query: _{{ newSearchQuery }}_</pre>
+    </form>
     <SearchMetadata msg="This is the search metadata." />
   </div>
 </template>
@@ -46,7 +50,4 @@ export default {
 </script>
 
 <style scoped>
-.searchform {
-  border-color: orange;
-}
 </style>
