@@ -1,6 +1,6 @@
 <template>
-  <div class="item component">
-    <p>{{ msg }}</p>
+  <div class="item">
+    <h3>{{ result.title }}</h3>
     <ItemStatus msg="Item status field" />
     <Button msg="Button" />
     <Button msg="Button" />
@@ -18,13 +18,15 @@ export default {
   	ItemStatus
   },
   props: {
-    msg: String
+    result: Object
   }
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .item {
-  border-color: green;
+  border-bottom: 1px solid gray;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
 }
 </style>

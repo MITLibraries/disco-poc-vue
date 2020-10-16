@@ -15,9 +15,11 @@
             <Facet msg="Title facet" />
           </div>
           <div class="content-main">
-            <Item msg="Search result item" />
-            <Item msg="Search result item" />
-            <Item msg="Search result item" />
+            <Item
+              v-for="(result, index) in results"
+              v-bind:result="result"
+              v-bind:index="index"
+              v-bind:key="result.id" />
             <Pagination msg="Pagination bar" />
             <Record msg="Full record for display" />
           </div>
@@ -66,13 +68,21 @@ export default {
   },
   data() {
     return {
+      results: [],
       query: ''
     }
   },
   methods: {
     doSearch: function(query) {
-      console.log('App has been instructed to search for _' + query + '_');
-      this.query = query;
+      if (query) {
+        console.log('App has been instructed to search for _' + query + '_');
+        this.query = query;
+        this.results = [
+          {id: 1,title:'First result'},
+          {id: 2,title:'Second result'},
+          {id: 3,title:'Third result'}
+        ];
+      }
     }
   }
 };
