@@ -15,6 +15,17 @@
             <Facet msg="Title facet" />
           </div>
           <div class="content-main">
+            <div v-if="status.loading" class="panel panel-info">
+              <div class="panel-heading">Loading...</div>
+            </div>
+            <div v-if="status.errored" class="panel panel-danger">
+              <div class="panel-heading">Something went wrong</div>
+              <div class="panel-body">
+                <p>{{ status.error_message.message }}</p>
+                <pre>{{ status.error_message }}</pre>
+              </div>
+            </div>
+
             <Item
               v-for="(result, index) in results"
               v-bind:result="result"
@@ -69,8 +80,13 @@ export default {
   },
   data() {
     return {
+      query: "",
       results: [],
-      query: ""
+      status: {
+        error_message: "",
+        errored: false,
+        loading: false
+      }
     };
   },
   methods: {
@@ -86,14 +102,18 @@ export default {
     },
     searchTimdex: function(query) {
       const axios = require('axios').default;
+      this.status.loading = true;
       axios.get('https://timdex.mit.edu/api/v1/search?q=' + query)
         .then(response => (
-          this.results = response.data.results,
-          console.log(this.results)
+          this.results = response.data.results
         ))
         .catch(error => (
-          console.log('Caught error'),
-          console.error(error)
+          this.status.errored = true,
+          this.status.error_message = error,
+          this.results = []
+        ))
+        .finally(() => (
+          this.status.loading = false
         ));
     }
   }
