@@ -79,11 +79,22 @@ export default {
         console.log("App has been instructed to search for _" + query + "_");
         this.query = query;
         this.results = [
-          { id: 1, title: "First result" },
-          { id: 2, title: "Second result" },
-          { id: 3, title: "Third result" }
+          { id: 1, title: "Retrieving results..." }
         ];
+        this.searchTimdex(query);
       }
+    },
+    searchTimdex: function(query) {
+      const axios = require('axios').default;
+      axios.get('https://timdex.mit.edu/api/v1/search?q=' + query)
+        .then(response => (
+          this.results = response.data.results,
+          console.log(this.results)
+        ))
+        .catch(error => (
+          console.log('Caught error'),
+          console.error(error)
+        ));
     }
   }
 };
