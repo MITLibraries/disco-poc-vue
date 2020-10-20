@@ -5,7 +5,7 @@
     <div class="wrap-outer-content layout-band">
       <div class="wrap-content">
         <div class="layout-band">
-          <SearchForm msg="This is the search form." />
+          <SearchForm @searched="doSearch" />
         </div>
         <div class="layout-1q2q1q layout-band">
           <div class="col1q">
@@ -15,9 +15,23 @@
             <Facet msg="Title facet" />
           </div>
           <div class="content-main">
-            <Item msg="Search result item" />
-            <Item msg="Search result item" />
-            <Item msg="Search result item" />
+            <div v-if="status.loading" class="panel panel-info">
+              <div class="panel-heading">Loading...</div>
+            </div>
+            <div v-if="status.errored" class="panel panel-danger">
+              <div class="panel-heading">Something went wrong</div>
+              <div class="panel-body">
+                <p>{{ status.error_message.message }}</p>
+                <pre>{{ status.error_message }}</pre>
+              </div>
+            </div>
+
+            <Item
+              v-for="(result, index) in results"
+              v-bind:result="result"
+              v-bind:index="index"
+              v-bind:key="result.id"
+            />
             <Pagination msg="Pagination bar" />
             <Record msg="Full record for display" />
           </div>
@@ -40,7 +54,7 @@
 import About from "./components/About.vue";
 import Breadcrumb from "./components/Breadcrumb.vue";
 import Facet from "./components/Facet.vue";
-import Footer from "./components/Footer.vue"
+import Footer from "./components/Footer.vue";
 import Header from "./components/Header.vue";
 import Help from "./components/Help.vue";
 import Item from "./components/Item.vue";
@@ -62,16 +76,53 @@ export default {
     Pagination,
     Record,
     Related,
-    SearchForm,
+    SearchForm
+  },
+  data() {
+    return {
+      query: "",
+      results: [],
+      status: {
+        error_message: "",
+        errored: false,
+        loading: false
+      }
+    };
+  },
+  methods: {
+    doSearch: function(query) {
+      if (query) {
+        console.log("App has been instructed to search for _" + query + "_");
+        this.query = query;
+        this.results = [
+          { id: 1, title: "Retrieving results..." }
+        ];
+        this.searchTimdex(query);
+      }
+    },
+    searchTimdex: function(query) {
+      const axios = require('axios').default;
+      this.status.loading = true;
+      axios.get('https://timdex.mit.edu/api/v1/search?q=' + query)
+        .then(response => (
+          this.results = response.data.results
+        ))
+        .catch(error => (
+          this.status.errored = true,
+          this.status.error_message = error,
+          this.results = []
+        ))
+        .finally(() => (
+          this.status.loading = false
+        ));
+    }
   }
 };
 </script>
 
 <style>
-@import "./assets/css/libraries-main.min.css"
-</style>
+@import "./assets/css/libraries-main.min.css";
 
-<style>
 .component {
   border: 0.4rem solid black;
 }

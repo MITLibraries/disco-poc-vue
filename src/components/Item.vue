@@ -1,6 +1,29 @@
 <template>
-  <div class="item component">
-    <p>{{ msg }}</p>
+  <div class="item">
+    <h3>{{ result.title }}</h3>
+    <p>
+      {{ result.content_type }} | {{ result.publication_date }}
+    </p>
+    <ul>
+      <li
+        v-for="(contributor) in result.contributors"
+        v-bind:key="contributor.value">
+        {{ contributor.value }} ({{ contributor.kind }})
+      </li>
+    </ul>
+    <div class="panel">
+      <div class="panel-heading">API data</div>
+      <div class="panel-body">
+        <pre>
+          {{ result }}
+        </pre>
+      </div>
+      <div class="panel-footer">
+        <a :href="result.source_link">View in Aleph</a>
+      </div>
+    </div>
+
+
     <ItemStatus msg="Item status field" />
     <Button msg="Button" />
     <Button msg="Button" />
@@ -18,13 +41,19 @@ export default {
   	ItemStatus
   },
   props: {
-    msg: String
+    result: Object
   }
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .item {
-  border-color: green;
+  border-bottom: 1px solid gray;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+
+  .panel-body pre {
+    font-size: 12px;
+  }
 }
 </style>
