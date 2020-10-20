@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form class="form-group">
+    <form @submit.prevent class="form-group">
       <label for="b-search-main" class="field-label">Search the MIT Libraries</label>
       <div class="form-horizontal">
         <input class="field field-text form-input" id="b-search-main" type="text" name="query" placeholder="Enter your search" v-model="query" />
@@ -24,10 +24,7 @@ export default {
     };
   },
   methods: {
-    newSearch: function (event) {
-      if (event) {
-        event.preventDefault()
-      }
+    newSearch: function () {
       this.$emit('searched', this.newSearchQuery);
     }
   },
