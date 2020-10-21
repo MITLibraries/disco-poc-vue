@@ -11,31 +11,31 @@ This repository will focus on the `DISCO UI` portion of this work.
 ## Project setup
 
 ```shell
-npm install
+yarn install
 ```
 
 ### Compiles and hot-reloads for development
 
 ```shell
-npm run serve
+yarn serve
 ```
 
 ### Compiles and minifies for production
 
 ```shell
-npm run build
+yarn build
 ```
 
 ### Run your unit tests
 
 ```shell
-npm run test:unit
+yarn test:unit
 ```
 
 ### Lints and fixes files
 
 ```shell
-npm run lint
+yarn lint
 ```
 
 ### Customize configuration
