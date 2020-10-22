@@ -10,6 +10,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install packages
-      run: npm install
+      run: yarn install
     - name: Run tests
-      run: npm run test:unit
+      run: yarn test:unit
+    - name: build
+      run: yarn build
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install packages
+      run: yarn install
+    - name: Run linter
+      run: yarn lint --no-fix --max-warnings 0
