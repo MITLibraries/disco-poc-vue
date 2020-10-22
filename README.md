@@ -41,3 +41,6 @@ yarn lint
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+Please also note that the application will need to be re-deployed using the
+Heroku tooling when making adjustments to environment variables.
