@@ -9,14 +9,14 @@
 </template>
 
 <script>
-import Button from './Button.vue'
-import ItemStatus from './ItemStatus.vue'
+import Button from "./Button.vue";
+import ItemStatus from "./ItemStatus.vue";
 
 export default {
   name: "Record",
   components: {
-  	Button,
-  	ItemStatus
+    Button,
+    ItemStatus
   },
   props: {
     msg: String

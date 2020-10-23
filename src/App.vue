@@ -94,27 +94,24 @@ export default {
       if (query) {
         console.log("App has been instructed to search for _" + query + "_");
         this.query = query;
-        this.results = [
-          { id: 1, title: "Retrieving results..." }
-        ];
+        this.results = [{ id: 1, title: "Retrieving results..." }];
         this.searchTimdex(query);
       }
     },
     searchTimdex: function(query) {
-      const axios = require('axios').default;
+      const axios = require("axios").default;
       this.status.loading = true;
-      axios.get('https://timdex.mit.edu/api/v1/search?q=' + query)
-        .then(response => (
-          this.results = response.data.results
-        ))
-        .catch(error => (
-          this.status.errored = true,
-          this.status.error_message = error,
-          this.results = []
-        ))
-        .finally(() => (
-          this.status.loading = false
-        ));
+      axios
+        .get("https://timdex.mit.edu/api/v1/search?q=" + query)
+        .then(response => (this.results = response.data.results))
+        .catch(
+          error => (
+            (this.status.errored = true),
+            (this.status.error_message = error),
+            (this.results = [])
+          )
+        )
+        .finally(() => (this.status.loading = false));
     }
   }
 };
