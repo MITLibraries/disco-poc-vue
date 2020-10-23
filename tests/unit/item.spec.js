@@ -4,16 +4,16 @@ import Item from "@/components/Item.vue";
 describe("Item.vue", () => {
   it("renders props.result.title when passed", () => {
     const result = {
-      title: 'The great American novel',
-      content_type: 'Book',
+      title: "The great American novel",
+      content_type: "Book",
       contributors: [
         {
-          "kind": "author",
-          "value": "John William De Forest"
+          kind: "author",
+          value: "John William De Forest"
         }
       ],
-      publication_date: '1868',
-      source_link: 'http://library.mit.edu/item/000544411'
+      publication_date: "1868",
+      source_link: "http://library.mit.edu/item/000544411"
     };
     const wrapper = shallowMount(Item, {
       props: { result }
