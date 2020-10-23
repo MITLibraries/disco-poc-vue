@@ -6,6 +6,7 @@ import { Integrations } from "@sentry/tracing";
 // Vue
 import { createApp } from "vue";
 import App from "./App.vue";
+import router from "./router";
 
 if (process.env.VUE_APP_SENTRY_DSN) {
   Sentry.init({
@@ -24,7 +25,9 @@ if (process.env.VUE_APP_SENTRY_DSN) {
   });
 }
 
-createApp(App).mount("#app");
+createApp(App)
+  .use(router)
+  .mount("#app");
 
 // Uncomment this line to guarantee that a message is sent to Sentry.
 // myUndefinedFunction();

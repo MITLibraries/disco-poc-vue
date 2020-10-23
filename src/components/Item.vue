@@ -1,6 +1,10 @@
 <template>
   <div class="item">
-    <h3>{{ result.title }}</h3>
+    <h3>
+      <router-link :to="{ name: 'Record', params: { recordId: result.id } }">{{
+        result.title
+      }}</router-link>
+    </h3>
     <p>{{ result.content_type }} | {{ result.publication_date }}</p>
     <ul>
       <li
