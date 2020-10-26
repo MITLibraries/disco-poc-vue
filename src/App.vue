@@ -33,7 +33,6 @@
               v-bind:key="result.id"
             />
             <Pagination msg="Pagination bar" />
-            <Record msg="Full record for display" />
           </div>
           <div class="col1q-r">
             <Related msg="Related libraries" />
@@ -59,7 +58,6 @@ import Header from "./components/Header.vue";
 import Help from "./components/Help.vue";
 import Item from "./components/Item.vue";
 import Pagination from "./components/Pagination.vue";
-import Record from "./components/Record.vue";
 import Related from "./components/Related.vue";
 import SearchForm from "./components/SearchForm.vue";
 
@@ -74,7 +72,6 @@ export default {
     Help,
     Item,
     Pagination,
-    Record,
     Related,
     SearchForm
   },
