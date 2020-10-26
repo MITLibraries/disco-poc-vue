@@ -2,11 +2,11 @@ import { shallowMount } from "@vue/test-utils";
 import About from "@/components/About.vue";
 
 describe("About.vue", () => {
-  it("renders props.msg when passed", () => {
-    const msg = "new message";
+  it("renders data.about when passed", () => {
+    const about = "new message";
     const wrapper = shallowMount(About, {
-      props: { msg }
+      props: { modelValue: about }
     });
-    expect(wrapper.text()).toMatch(msg);
+    expect(wrapper.text()).toMatch(about);
   });
 });

@@ -1,6 +1,6 @@
 <template>
   <div class="record component">
-    <p>{{ msg }}</p>
+    <p>{{ modelValue }}</p>
     <ItemStatus msg="Item status field" />
     <Button msg="Button" />
     <Button msg="Button" />
@@ -19,7 +19,7 @@ export default {
     ItemStatus
   },
   props: {
-    msg: String
+    modelValue: String
   }
 };
 </script>

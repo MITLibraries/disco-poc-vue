@@ -1,6 +1,8 @@
 <template>
-  <div class="searchmetadata component">
-    <p>{{ msg }}</p>
+  <div v-bind:class="panelStatus" class="panel">
+    <div class="panel-heading">{{ panelHeading }}</div>
+    <div class="panel-body">"{{ query }}"</div>
+    <div class="panel-footer">{{ status }}</div>
   </div>
 </template>
 
@@ -8,13 +10,27 @@
 export default {
   name: "SearchMetadata",
   props: {
-    msg: String
+    hits: Number,
+    query: String,
+    status: Object
+  },
+  computed: {
+    panelHeading: function() {
+      if (this.status.ready == true) {
+        return "Results summary: " + this.hits + " results";
+      } else if (this.status.loading == true) {
+        return "Loading results...";
+      }
+      return "Search Metadata:";
+    },
+    panelStatus: function() {
+      if (this.status.ready == true) {
+        return "panel-success";
+      }
+      return "panel-info";
+    }
   }
 };
 </script>
 
-<style scoped>
-.searchmetadata {
-  border-color: yellow;
-}
-</style>
+<style scoped></style>

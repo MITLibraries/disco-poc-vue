@@ -1,7 +1,7 @@
 <template>
   <div class="about component bit">
     <h3 class="title">About</h3>
-    <p>{{ msg }}</p>
+    <p>{{ modelValue }}</p>
   </div>
 </template>
 
@@ -9,7 +9,7 @@
 export default {
   name: "About",
   props: {
-    msg: String
+    modelValue: String
   }
 };
 </script>

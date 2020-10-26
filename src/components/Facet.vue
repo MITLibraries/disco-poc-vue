@@ -1,6 +1,6 @@
 <template>
   <div class="facet component">
-    <p>{{ msg }}</p>
+    <p>{{ facetTitle }}</p>
   </div>
 </template>
 
@@ -8,7 +8,12 @@
 export default {
   name: "Facet",
   props: {
-    msg: String
+    facet: String
+  },
+  computed: {
+    facetTitle: function() {
+      return this.facet + " facet";
+    }
   }
 };
 </script>
