@@ -16,6 +16,7 @@
     "axios": "^0.20.0",
     "core-js": "^3.6.5",
     "moxios": "^0.4.0",
+    "sinon": "^9.2.0",
     "vue": "^3.0.0"
   },
   "devDependencies": {
