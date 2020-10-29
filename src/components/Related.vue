@@ -1,6 +1,6 @@
 <template>
   <div class="related component">
-    <p>{{ msg }}</p>
+    <p>{{ panelTitle }}</p>
   </div>
 </template>
 
@@ -8,7 +8,12 @@
 export default {
   name: "Related",
   props: {
-    msg: String
+    related: String
+  },
+  computed: {
+    panelTitle: function() {
+      return "Related " + this.related;
+    }
   }
 };
 </script>

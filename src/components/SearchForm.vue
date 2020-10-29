@@ -17,16 +17,11 @@
           Search
         </button>
       </div>
-      <pre>Raw query: _{{ query }}_</pre>
-      <pre>Parsed query: _{{ newSearchQuery }}_</pre>
     </form>
-    <SearchMetadata msg="This is the search metadata." />
   </div>
 </template>
 
 <script>
-import SearchMetadata from "./SearchMetadata.vue";
-
 export default {
   name: "Search Form",
   data() {
@@ -53,9 +48,6 @@ export default {
       }
       return newQuery;
     }
-  },
-  components: {
-    SearchMetadata
   }
 };
 </script>

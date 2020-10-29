@@ -2,11 +2,10 @@ import { shallowMount } from "@vue/test-utils";
 import Breadcrumb from "@/components/Breadcrumb.vue";
 
 describe("Breadcrumb.vue", () => {
-  it("renders props.msg when passed", () => {
-    const msg = "new message";
-    const wrapper = shallowMount(Breadcrumb, {
-      props: { msg }
-    });
-    expect(wrapper.text()).toMatch(msg);
+  var wrapper = shallowMount(Breadcrumb, {});
+  it("starts with two links", () => {
+    expect(wrapper.text()).toMatch("Libraries home");
+    expect(wrapper.text()).toMatch("Search");
   });
+  // Need to write tests for manipulating the breadcrumb
 });

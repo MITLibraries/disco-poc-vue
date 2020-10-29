@@ -2,11 +2,11 @@ import { shallowMount } from "@vue/test-utils";
 import Record from "@/components/Record.vue";
 
 describe("Record.vue", () => {
-  it("renders props.msg when passed", () => {
-    const msg = "new message";
+  it("renders data.record when passed", () => {
+    const record = "new message";
     const wrapper = shallowMount(Record, {
-      props: { msg }
+      props: { modelValue: record }
     });
-    expect(wrapper.text()).toMatch(msg);
+    expect(wrapper.text()).toMatch(record);
   });
 });

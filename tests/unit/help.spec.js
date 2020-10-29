@@ -2,11 +2,11 @@ import { shallowMount } from "@vue/test-utils";
 import Help from "@/components/Help.vue";
 
 describe("Help.vue", () => {
-  it("renders props.msg when passed", () => {
-    const msg = "new message";
+  it("renders data.help when passed", () => {
+    const help = "new message";
     const wrapper = shallowMount(Help, {
-      props: { msg }
+      propsData: { modelValue: help }
     });
-    expect(wrapper.text()).toMatch(msg);
+    expect(wrapper.text()).toMatch(help);
   });
 });
