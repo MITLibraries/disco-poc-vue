@@ -33,6 +33,8 @@
               </div>
             </div>
 
+            <router-view />
+
             <Item
               v-for="(result, index) in results"
               v-bind:result="result"
@@ -40,7 +42,6 @@
               v-bind:key="result.id"
             />
             <Pagination v-if="showPagination" msg="Pagination bar" />
-            <Record v-if="record" v-model="record" />
           </div>
           <div v-if="sidebarRight" class="col1q-r">
             <Related
@@ -63,11 +64,10 @@ import About from "./components/About.vue";
 import Breadcrumb from "./components/Breadcrumb.vue";
 import Facet from "./components/Facet.vue";
 import Footer from "./components/Footer.vue";
+import Item from "./components/Item.vue";
 import Header from "./components/Header.vue";
 import Help from "./components/Help.vue";
-import Item from "./components/Item.vue";
 import Pagination from "./components/Pagination.vue";
-import Record from "./components/Record.vue";
 import Related from "./components/Related.vue";
 import SearchForm from "./components/SearchForm.vue";
 import SearchMetadata from "./components/SearchMetadata.vue";
@@ -79,11 +79,10 @@ export default {
     Breadcrumb,
     Facet,
     Footer,
+    Item,
     Header,
     Help,
-    Item,
     Pagination,
-    Record,
     Related,
     SearchForm,
     SearchMetadata
@@ -120,7 +119,7 @@ export default {
       this.status.loading = true;
       this.status.ready = false;
       axios
-        .get(String(process.env.VUE_APP_TIMDEX_API) + query)
+        .get(String(process.env.VUE_APP_TIMDEX_API) + "/search?q=" + query)
         .then(
           response => (
             (this.results = response.data.results),
@@ -182,6 +181,7 @@ export default {
 </script>
 
 <style>
+@import "./assets/css/bento.min.css";
 @import "./assets/css/libraries-main.min.css";
 
 .component {
