@@ -144,6 +144,7 @@ export default {
     callTimdex: function(recordId) {
       const axios = require("axios").default;
       this.status.loading = true;
+      console.log(process.env.VUE_APP_TIMDEX_API);
       axios
         .get(String(process.env.VUE_APP_TIMDEX_API) + "/record/" + recordId)
         .then(response => (this.result = response.data))

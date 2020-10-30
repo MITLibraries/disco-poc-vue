@@ -3,6 +3,11 @@ import Record from "..//components/Record.vue";
 
 const routes = [
   {
+    path: "/",
+    name: "Home",
+    component: {}
+  },
+  {
     path: "/record/:recordId",
     name: "Record",
     component: Record,

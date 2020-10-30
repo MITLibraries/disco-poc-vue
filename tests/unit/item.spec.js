@@ -1,4 +1,5 @@
 import { shallowMount } from "@vue/test-utils";
+import VueRouter from "vue-router";
 import Item from "@/components/Item.vue";
 
 describe("Item.vue", () => {
@@ -16,6 +17,7 @@ describe("Item.vue", () => {
       source_link: "http://library.mit.edu/item/000544411"
     };
     const wrapper = shallowMount(Item, {
+      stubs: ["router-link", "router-view"],
       props: { result }
     });
     expect(wrapper.text()).toMatch(result.title);
