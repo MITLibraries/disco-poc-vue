@@ -6,7 +6,7 @@
       }}</router-link>
     </h3>
     <p>{{ result.content_type }} | {{ result.publication_date }}</p>
-    <ul>
+    <ul class="list-inline-pipe contributors">
       <li
         v-for="contributor in result.contributors"
         v-bind:key="contributor.value"
@@ -14,21 +14,15 @@
         {{ contributor.value }} ({{ contributor.kind }})
       </li>
     </ul>
-    <div class="panel">
-      <div class="panel-heading">API data</div>
-      <div class="panel-body">
-        <pre>
-          {{ result }}
-        </pre>
-      </div>
-      <div class="panel-footer">
-        <a :href="result.source_link">View in Aleph</a>
-      </div>
-    </div>
+    <ul class="list-unbulleted copy-sup">
+      <li v-for="subject in result.subjects" v-bind:key="subject">
+        {{ subject }}
+      </li>
+    </ul>
+    <p><a :href="result.source_link">View in Aleph</a></p>
 
-    <ItemStatus msg="Item status field" />
-    <Button msg="Button" />
-    <Button msg="Button" />
+    <ItemStatus v-if="showStatus" msg="Item status field" />
+    <Button v-for="button in buttons" v-bind:key="button" msg="Button" />
   </div>
 </template>
 
@@ -44,6 +38,16 @@ export default {
   },
   props: {
     result: Object
+  },
+  computed: {
+    buttons: function() {
+      return [];
+    },
+    showStatus: function() {
+      return this.result.realtime_holdings_link == "Not Yet Implemented"
+        ? false
+        : true;
+    }
   }
 };
 </script>
@@ -54,8 +58,15 @@ export default {
   margin-bottom: 1rem;
   padding-bottom: 1rem;
 
-  .panel-body pre {
-    font-size: 12px;
+  .list-inline-pipe.contributors {
+    li:after {
+      margin-left: 0;
+      content: "; ";
+    }
+
+    li:last-child:after {
+      content: "";
+    }
   }
 }
 </style>
