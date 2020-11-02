@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Record from "..//components/Record.vue";
+import Record from "@/views/Record.vue";
 
 const routes = [
   {
