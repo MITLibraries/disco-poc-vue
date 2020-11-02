@@ -1,7 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Record from "..//components/Record.vue";
+import Record from "@/views/Record.vue";
 
 const routes = [
+  {
+    path: "/",
+    name: "Home",
+    component: {},
+    props: false
+  },
   {
     path: "/record/:recordId",
     name: "Record",
