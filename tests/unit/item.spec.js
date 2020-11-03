@@ -1,8 +1,17 @@
-import { shallowMount } from "@vue/test-utils";
+import { mount, RouterLinkStub } from "@vue/test-utils";
 import Item from "@/components/Item.vue";
 
 describe("Item.vue", () => {
-  it("renders all fields when present", () => {
+  it("renders props.result.title when passed", () => {
+    const $router = {
+      push: jest.fn()
+    };
+    const $route = {
+      params: {
+        recordId: "000544411"
+      }
+    };
+
     const result = {
       title: "The great American novel",
       content_type: "Book",
@@ -16,7 +25,13 @@ describe("Item.vue", () => {
       source_link: "http://library.mit.edu/item/000544411",
       subjects: ["fiction"]
     };
-    const wrapper = shallowMount(Item, {
+    const wrapper = mount(Item, {
+      global: {
+        components: {
+          RouterLink: RouterLinkStub
+        },
+        mocks: { $route, $router }
+      },
       props: { result }
     });
     expect(wrapper.text()).toMatch(result.title);
