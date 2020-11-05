@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Record from "@/views/Record.vue";
+import Results from "@/views/Results.vue";
 
 const routes = [
   {
@@ -13,6 +14,12 @@ const routes = [
     name: "Record",
     component: Record,
     props: true
+  },
+  {
+    path: "/results",
+    name: "Results",
+    component: Results,
+    props: route => ({ rawQuery: route.query.q })
   }
 ];
 
