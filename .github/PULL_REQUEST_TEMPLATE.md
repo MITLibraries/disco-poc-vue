@@ -11,6 +11,8 @@
 - [ ] Tests
 - [ ] Documentation
 - [ ] Stakeholder approval
+- [ ] All new ENV documented in README
+- [ ] All new ENV added to Heroku Pipeline, Staging and Prod
 
 #### Includes new or updated dependencies?
 YES | NO
