@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Record from "@/views/Record.vue";
 import Results from "@/views/Results.vue";
+import NotFound from "@/views/NotFound.vue";
 
 const routes = [
   {
@@ -20,6 +21,11 @@ const routes = [
     name: "Results",
     component: Results,
     props: route => ({ rawQuery: route.query.q })
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    component: NotFound
   }
 ];
 
