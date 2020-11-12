@@ -20,7 +20,7 @@ const routes = [
     path: "/results",
     name: "Results",
     component: Results,
-    props: route => ({ rawQuery: route.query.q })
+    props: true
   },
   {
     path: "/:pathMatch(.*)*",
