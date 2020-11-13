@@ -26,13 +26,13 @@ export default {
   name: "Search Form",
   data() {
     return {
-      query: ""
+      query: "",
     };
   },
   methods: {
-    newSearch: function() {
+    newSearch: function () {
       this.$emit("searched", this.newSearchQuery);
-    }
+    },
   },
   computed: {
     // newSearchQuery is computed based on user input. At this level we only
@@ -41,14 +41,14 @@ export default {
     // may happen in the context of each API.
     //
     // Regex from https://www.nfollmer.com/2016/07/06/truncate-string-word-break-javascript/
-    newSearchQuery: function() {
+    newSearchQuery: function () {
       var newQuery = this.query.trim();
       if (newQuery.length > 1500) {
         newQuery = newQuery.substring(0, 1500).replace(/\s+\S*$/, "");
       }
       return newQuery;
-    }
-  }
+    },
+  },
 };
 </script>
 

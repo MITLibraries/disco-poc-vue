@@ -30,9 +30,9 @@ export default {
   name: "Item",
   components: {},
   props: {
-    result: Object
+    result: Object,
   },
-  computed: {}
+  computed: {},
 };
 </script>
 

@@ -5,7 +5,7 @@ describe("Facet.vue", () => {
   it("renders props.facet when passed", () => {
     const facet = "new message";
     const wrapper = shallowMount(Facet, {
-      props: { facet }
+      props: { facet },
     });
     expect(wrapper.text()).toMatch(facet);
   });

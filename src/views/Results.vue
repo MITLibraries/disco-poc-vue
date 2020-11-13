@@ -37,7 +37,7 @@ export default {
   components: {
     Facet,
     Item,
-    Pagination
+    Pagination,
   },
   data() {
     return {
@@ -48,26 +48,26 @@ export default {
       status: {
         error_message: "",
         errored: false,
-        loading: false
-      }
+        loading: false,
+      },
     };
   },
   computed: {
-    contentClass: function() {
+    contentClass: function () {
       return this.showSidebar ? "col3q" : "content-main";
     },
-    layoutClass: function() {
+    layoutClass: function () {
       return this.showSidebar ? "layout-1q3q" : "";
     },
-    showPagination: function() {
+    showPagination: function () {
       return this.hits > this.results_per_page ? true : false;
     },
-    showSidebar: function() {
+    showSidebar: function () {
       return this.facets.length ? true : false;
-    }
+    },
   },
   methods: {
-    fetchSearch: function() {
+    fetchSearch: function () {
       this.query = this.$route.query.q;
       if (this.query) {
         this.results = [];
@@ -93,13 +93,13 @@ export default {
         this.status.error_message =
           "Starting over may help. If it does not, please let us know!";
       }
-    }
+    },
   },
   created() {
     this.fetchSearch();
   },
   watch: {
-    $route: "fetchSearch"
-  }
+    $route: "fetchSearch",
+  },
 };
 </script>

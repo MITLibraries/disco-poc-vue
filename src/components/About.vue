@@ -9,8 +9,8 @@
 export default {
   name: "About",
   props: {
-    modelValue: String
-  }
+    modelValue: String,
+  },
 };
 </script>
 

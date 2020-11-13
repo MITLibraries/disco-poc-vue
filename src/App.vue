@@ -53,7 +53,7 @@ export default {
     Help,
     Related,
     SearchForm,
-    SearchMetadata
+    SearchMetadata,
   },
   data() {
     return {
@@ -69,34 +69,34 @@ export default {
         error_message: "",
         errored: false,
         loading: false,
-        ready: false
-      }
+        ready: false,
+      },
     };
   },
   methods: {
-    receiveSearch: function(query) {
+    receiveSearch: function (query) {
       this.query = query;
       this.$router.push({ name: "Results", query: { q: this.query } });
     },
-    receiveSummary: function(data) {
+    receiveSummary: function (data) {
       this.hits = data.hits;
       this.query = data.query;
-    }
+    },
   },
   computed: {
-    layoutBand: function() {
+    layoutBand: function () {
       if (this.sidebarRight) {
         return "layout-3q1q";
       }
       return "";
     },
-    layoutContent: function() {
+    layoutContent: function () {
       if (this.sidebarRight) {
         return "col3q";
       }
       return "";
     },
-    showSearchMetadata: function() {
+    showSearchMetadata: function () {
       if (this.query === "") {
         return false;
       }
@@ -105,10 +105,10 @@ export default {
       }
       return true;
     },
-    sidebarRight: function() {
+    sidebarRight: function () {
       return this.relateds.length ? true : false;
-    }
-  }
+    },
+  },
 };
 </script>
 

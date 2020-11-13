@@ -5,7 +5,7 @@ describe("Help.vue", () => {
   it("renders data.help when passed", () => {
     const help = "new message";
     const wrapper = shallowMount(Help, {
-      propsData: { modelValue: help }
+      propsData: { modelValue: help },
     });
     expect(wrapper.text()).toMatch(help);
   });

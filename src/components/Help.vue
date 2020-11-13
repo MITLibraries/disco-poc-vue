@@ -15,8 +15,8 @@
 export default {
   name: "Help",
   props: {
-    modelValue: String
-  }
+    modelValue: String,
+  },
 };
 </script>
 
