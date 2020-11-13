@@ -8,8 +8,8 @@
 export default {
   name: "ItemStatus",
   props: {
-    msg: String
-  }
+    msg: String,
+  },
 };
 </script>
 

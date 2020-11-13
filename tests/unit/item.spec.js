@@ -4,12 +4,12 @@ import Item from "@/components/Item.vue";
 describe("Item.vue", () => {
   it("renders props.result.title when passed", () => {
     const $router = {
-      push: jest.fn()
+      push: jest.fn(),
     };
     const $route = {
       params: {
-        recordId: "000544411"
-      }
+        recordId: "000544411",
+      },
     };
 
     const result = {
@@ -18,21 +18,21 @@ describe("Item.vue", () => {
       contributors: [
         {
           kind: "author",
-          value: "John William De Forest"
-        }
+          value: "John William De Forest",
+        },
       ],
       publication_date: "1868",
       source_link: "http://library.mit.edu/item/000544411",
-      subjects: ["fiction"]
+      subjects: ["fiction"],
     };
     const wrapper = mount(Item, {
       global: {
         components: {
-          RouterLink: RouterLinkStub
+          RouterLink: RouterLinkStub,
         },
-        mocks: { $route, $router }
+        mocks: { $route, $router },
       },
-      props: { result }
+      props: { result },
     });
     expect(wrapper.text()).toMatch(result.title);
     expect(wrapper.text()).toMatch(result.content_type);
@@ -44,76 +44,76 @@ describe("Item.vue", () => {
 
   it("does not error when non-required elements are missing", () => {
     const $router = {
-      push: jest.fn()
+      push: jest.fn(),
     };
     const $route = {
       params: {
-        recordId: "000544411"
-      }
+        recordId: "000544411",
+      },
     };
 
     const result = {
-      title: "The great American novel"
+      title: "The great American novel",
     };
     const wrapper = mount(Item, {
       global: {
         components: {
-          RouterLink: RouterLinkStub
+          RouterLink: RouterLinkStub,
         },
-        mocks: { $route, $router }
+        mocks: { $route, $router },
       },
-      props: { result }
+      props: { result },
     });
     expect(wrapper.html()).toMatch(result.title);
   });
 
   it("does not show link to source if not provided", () => {
     const $router = {
-      push: jest.fn()
+      push: jest.fn(),
     };
     const $route = {
       params: {
-        recordId: "000544411"
-      }
+        recordId: "000544411",
+      },
     };
 
     const result = {};
     const wrapper = mount(Item, {
       global: {
         components: {
-          RouterLink: RouterLinkStub
+          RouterLink: RouterLinkStub,
         },
-        mocks: { $route, $router }
+        mocks: { $route, $router },
       },
-      props: { result }
+      props: { result },
     });
     expect(wrapper.text()).not.toMatch("View in");
   });
 
   it("uses source if present for link", () => {
     const $router = {
-      push: jest.fn()
+      push: jest.fn(),
     };
     const $route = {
       params: {
-        recordId: "000544411"
-      }
+        recordId: "000544411",
+      },
     };
 
     const result = {
       title: "The great American novel",
       source_link: "http://library.mit.edu/item/000544411",
-      source: "Super cool source"
+      source: "Super cool source",
     };
 
     const wrapper = mount(Item, {
       global: {
         components: {
-          RouterLink: RouterLinkStub
+          RouterLink: RouterLinkStub,
         },
-        mocks: { $route, $router }
+        mocks: { $route, $router },
       },
-      props: { result }
+      props: { result },
     });
     expect(wrapper.text()).toMatch("View in Super cool source");
     expect(wrapper.html()).toMatch(result.source_link);
@@ -121,27 +121,27 @@ describe("Item.vue", () => {
 
   it("uses generic source if not present for link", () => {
     const $router = {
-      push: jest.fn()
+      push: jest.fn(),
     };
     const $route = {
       params: {
-        recordId: "000544411"
-      }
+        recordId: "000544411",
+      },
     };
 
     const result = {
       title: "The great American novel",
-      source_link: "http://library.mit.edu/item/000544411"
+      source_link: "http://library.mit.edu/item/000544411",
     };
 
     const wrapper = mount(Item, {
       global: {
         components: {
-          RouterLink: RouterLinkStub
+          RouterLink: RouterLinkStub,
         },
-        mocks: { $route, $router }
+        mocks: { $route, $router },
       },
-      props: { result }
+      props: { result },
     });
     expect(wrapper.text()).toMatch("View in source");
     expect(wrapper.html()).toMatch(result.source_link);
@@ -149,28 +149,28 @@ describe("Item.vue", () => {
 
   it("displays subjects if present", () => {
     const $router = {
-      push: jest.fn()
+      push: jest.fn(),
     };
     const $route = {
       params: {
-        recordId: "000544411"
-      }
+        recordId: "000544411",
+      },
     };
 
     const result = {
       title: "The great American novel",
       source_link: "http://library.mit.edu/item/000544411",
-      subjects: ["Things made of cheese", "Wisconsin -- History -- Cheese"]
+      subjects: ["Things made of cheese", "Wisconsin -- History -- Cheese"],
     };
 
     const wrapper = mount(Item, {
       global: {
         components: {
-          RouterLink: RouterLinkStub
+          RouterLink: RouterLinkStub,
         },
-        mocks: { $route, $router }
+        mocks: { $route, $router },
       },
-      props: { result }
+      props: { result },
     });
     expect(wrapper.text()).toMatch("Things made of cheese");
     expect(wrapper.text()).toMatch("Wisconsin -- History -- Cheese");
@@ -178,12 +178,12 @@ describe("Item.vue", () => {
 
   it("displays authors if present", () => {
     const $router = {
-      push: jest.fn()
+      push: jest.fn(),
     };
     const $route = {
       params: {
-        recordId: "000544411"
-      }
+        recordId: "000544411",
+      },
     };
 
     const result = {
@@ -191,18 +191,21 @@ describe("Item.vue", () => {
       source_link: "http://library.mit.edu/item/000544411",
       contributors: [
         { value: "Lastoson, Firsty", kind: "Creator" },
-        { value: "Namenamenamename", kind: "Assistant to the Regional Manager" }
-      ]
+        {
+          value: "Namenamenamename",
+          kind: "Assistant to the Regional Manager",
+        },
+      ],
     };
 
     const wrapper = mount(Item, {
       global: {
         components: {
-          RouterLink: RouterLinkStub
+          RouterLink: RouterLinkStub,
         },
-        mocks: { $route, $router }
+        mocks: { $route, $router },
       },
-      props: { result }
+      props: { result },
     });
     expect(wrapper.text()).toMatch("Lastoson, Firsty (Creator)");
     expect(wrapper.text()).toMatch(
@@ -212,12 +215,12 @@ describe("Item.vue", () => {
 
   it("displays authors generic kind if not provided", () => {
     const $router = {
-      push: jest.fn()
+      push: jest.fn(),
     };
     const $route = {
       params: {
-        recordId: "000544411"
-      }
+        recordId: "000544411",
+      },
     };
 
     const result = {
@@ -225,18 +228,18 @@ describe("Item.vue", () => {
       source_link: "http://library.mit.edu/item/000544411",
       contributors: [
         { value: "Lastoson, Firsty", kind: "Creator" },
-        { value: "Namenamenamename" }
-      ]
+        { value: "Namenamenamename" },
+      ],
     };
 
     const wrapper = mount(Item, {
       global: {
         components: {
-          RouterLink: RouterLinkStub
+          RouterLink: RouterLinkStub,
         },
-        mocks: { $route, $router }
+        mocks: { $route, $router },
       },
-      props: { result }
+      props: { result },
     });
     expect(wrapper.text()).toMatch("Lastoson, Firsty (Creator)");
     expect(wrapper.text()).toMatch("Namenamenamename (contributor)");

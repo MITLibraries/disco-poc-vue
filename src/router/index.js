@@ -8,30 +8,30 @@ const routes = [
     path: "/",
     name: "Home",
     component: {},
-    props: false
+    props: false,
   },
   {
     path: "/record/:recordId",
     name: "Record",
     component: Record,
-    props: true
+    props: true,
   },
   {
     path: "/results",
     name: "Results",
     component: Results,
-    props: true
+    props: true,
   },
   {
     path: "/:pathMatch(.*)*",
     name: "NotFound",
-    component: NotFound
-  }
+    component: NotFound,
+  },
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
 });
 
 export default router;

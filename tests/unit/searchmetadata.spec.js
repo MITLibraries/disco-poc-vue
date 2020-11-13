@@ -7,10 +7,10 @@ describe("SearchMetadata.vue", () => {
     const query = "new message";
     const status = {
       errored: false,
-      ready: true
+      ready: true,
     };
     const wrapper = shallowMount(SearchMetadata, {
-      props: { hits, query, status }
+      props: { hits, query, status },
     });
     expect(wrapper.text()).toMatch("Results summary:");
     expect(wrapper.text()).toMatch(query);
@@ -20,10 +20,10 @@ describe("SearchMetadata.vue", () => {
     const hits = 0;
     const query = "foo";
     const status = {
-      loading: true
+      loading: true,
     };
     const waiting = shallowMount(SearchMetadata, {
-      props: { hits, query, status }
+      props: { hits, query, status },
     });
     expect(waiting.text()).toMatch("Loading results...");
   });

@@ -12,10 +12,10 @@ export default {
   props: {
     hits: Number,
     query: String,
-    status: Object
+    status: Object,
   },
   computed: {
-    panelHeading: function() {
+    panelHeading: function () {
       if (this.status.ready == true) {
         return "Results summary: " + this.hits + " results";
       } else if (this.status.loading == true) {
@@ -23,13 +23,13 @@ export default {
       }
       return "Search Metadata:";
     },
-    panelStatus: function() {
+    panelStatus: function () {
       if (this.status.ready == true) {
         return "panel-success";
       }
       return "panel-info";
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -10,8 +10,8 @@
 export default {
   name: "Button",
   props: {
-    msg: String
-  }
+    msg: String,
+  },
 };
 </script>
 

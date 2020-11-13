@@ -124,7 +124,7 @@ const axios = require("axios").default;
 export default {
   name: "Record",
   props: {
-    modelValue: String
+    modelValue: String,
   },
   data() {
     return {
@@ -132,12 +132,12 @@ export default {
       status: {
         error_message: "",
         errored: false,
-        loading: false
-      }
+        loading: false,
+      },
     };
   },
   methods: {
-    fetchRecord: function() {
+    fetchRecord: function () {
       let recordId = this.$route.params.recordId;
       if (recordId) {
         this.recordId = recordId;
@@ -173,13 +173,13 @@ export default {
           this.status.error_title = "An unknown error occured.";
         }
       }
-    }
+    },
   },
   created() {
     this.fetchRecord();
   },
   watch: {
-    $route: "fetchRecord"
-  }
+    $route: "fetchRecord",
+  },
 };
 </script>

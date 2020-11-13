@@ -8,13 +8,13 @@
 export default {
   name: "Related",
   props: {
-    related: String
+    related: String,
   },
   computed: {
-    panelTitle: function() {
+    panelTitle: function () {
       return "Related " + this.related;
-    }
-  }
+    },
+  },
 };
 </script>
 

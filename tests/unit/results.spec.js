@@ -16,26 +16,26 @@ describe("Results.vue", () => {
       status: 200,
       data: {
         hits: 0,
-        results: []
-      }
+        results: [],
+      },
     };
 
     axios.get.mockImplementation(() => Promise.resolve(mockResponse));
 
     const mockRoute = {
-      query: { q: "obscura" }
+      query: { q: "obscura" },
     };
     const mockRouter = {
-      push: jest.fn()
+      push: jest.fn(),
     };
 
     const wrapper = mount(Results, {
       global: {
         mocks: {
           $route: mockRoute,
-          $router: mockRouter
-        }
-      }
+          $router: mockRouter,
+        },
+      },
     });
 
     expect(axios.get).toHaveBeenCalledTimes(1);
@@ -62,31 +62,31 @@ describe("Results.vue", () => {
           {
             id: "002574584",
             title: "Cheese",
-            source: "MIT Aleph"
-          }
-        ]
-      }
+            source: "MIT Aleph",
+          },
+        ],
+      },
     };
 
     axios.get.mockImplementation(() => Promise.resolve(mockResponse));
 
     const mockRoute = {
-      query: { q: "cheese" }
+      query: { q: "cheese" },
     };
     const mockRouter = {
-      push: jest.fn()
+      push: jest.fn(),
     };
 
     const wrapper = mount(Results, {
       global: {
         components: {
-          RouterLink: RouterLinkStub
+          RouterLink: RouterLinkStub,
         },
         mocks: {
           $route: mockRoute,
-          $router: mockRouter
-        }
-      }
+          $router: mockRouter,
+        },
+      },
     });
 
     expect(axios.get).toHaveBeenCalledTimes(1);
@@ -115,36 +115,36 @@ describe("Results.vue", () => {
           {
             id: "002574584",
             title: "Cheese",
-            source: "MIT Aleph"
+            source: "MIT Aleph",
           },
           {
             id: "002574585",
             title: "Fromage",
-            source: "MIT Aleph"
-          }
-        ]
-      }
+            source: "MIT Aleph",
+          },
+        ],
+      },
     };
 
     axios.get.mockImplementation(() => Promise.resolve(mockResponse));
 
     const mockRoute = {
-      query: { q: "cheese" }
+      query: { q: "cheese" },
     };
     const mockRouter = {
-      push: jest.fn()
+      push: jest.fn(),
     };
 
     const wrapper = mount(Results, {
       global: {
         components: {
-          RouterLink: RouterLinkStub
+          RouterLink: RouterLinkStub,
         },
         mocks: {
           $route: mockRoute,
-          $router: mockRouter
-        }
-      }
+          $router: mockRouter,
+        },
+      },
     });
 
     expect(axios.get).toHaveBeenCalledTimes(1);
@@ -171,26 +171,26 @@ describe("Results.vue", () => {
     mockResponse = {
       status: 500,
       data: {
-        error: "Now you've done it"
-      }
+        error: "Now you've done it",
+      },
     };
 
     axios.get.mockImplementation(() => Promise.reject(mockResponse));
 
     const mockRoute = {
-      query: { q: "snow crash" }
+      query: { q: "snow crash" },
     };
     const mockRouter = {
-      push: jest.fn()
+      push: jest.fn(),
     };
 
     const wrapper = mount(Results, {
       global: {
         mocks: {
           $route: mockRoute,
-          $router: mockRouter
-        }
-      }
+          $router: mockRouter,
+        },
+      },
     });
 
     expect(axios.get).toHaveBeenCalledTimes(1);

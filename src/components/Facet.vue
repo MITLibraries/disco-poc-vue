@@ -8,13 +8,13 @@
 export default {
   name: "Facet",
   props: {
-    facet: String
+    facet: String,
   },
   computed: {
-    facetTitle: function() {
+    facetTitle: function () {
       return this.facet + " facet";
-    }
-  }
+    },
+  },
 };
 </script>
 

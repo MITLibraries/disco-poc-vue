@@ -17,28 +17,28 @@ describe("valid id", () => {
       data: {
         id: "002574584",
         title: "Cheese",
-        source: "MIT Aleph"
-      }
+        source: "MIT Aleph",
+      },
     };
 
     axios.get.mockImplementation(() => Promise.resolve(mockResponse));
 
     const mockRoute = {
       params: {
-        recordId: "002574584"
-      }
+        recordId: "002574584",
+      },
     };
     const mockRouter = {
-      push: jest.fn()
+      push: jest.fn(),
     };
 
     const wrapper = mount(Record, {
       global: {
         mocks: {
           $route: mockRoute,
-          $router: mockRouter
-        }
-      }
+          $router: mockRouter,
+        },
+      },
     });
 
     expect(axios.get).toHaveBeenCalledTimes(1);
@@ -65,29 +65,29 @@ describe("invalid id", () => {
         status: 404,
         statusText: "Not Found",
         data: {
-          error: "record not found"
-        }
-      }
+          error: "record not found",
+        },
+      },
     };
 
     axios.get.mockImplementation(() => Promise.reject(mockResponse));
 
     const mockRoute = {
       params: {
-        recordId: "asdf"
-      }
+        recordId: "asdf",
+      },
     };
     const mockRouter = {
-      push: jest.fn()
+      push: jest.fn(),
     };
 
     const wrapper = mount(Record, {
       global: {
         mocks: {
           $route: mockRoute,
-          $router: mockRouter
-        }
-      }
+          $router: mockRouter,
+        },
+      },
     });
 
     expect(axios.get).toHaveBeenCalledTimes(1);
@@ -108,28 +108,28 @@ describe("non 404 error", () => {
     mockResponse = {
       response: {
         status: 500,
-        statusText: "Internal Server Error"
-      }
+        statusText: "Internal Server Error",
+      },
     };
 
     axios.get.mockImplementation(() => Promise.reject(mockResponse));
 
     const mockRoute = {
       params: {
-        recordId: "asdf"
-      }
+        recordId: "asdf",
+      },
     };
     const mockRouter = {
-      push: jest.fn()
+      push: jest.fn(),
     };
 
     const wrapper = mount(Record, {
       global: {
         mocks: {
           $route: mockRoute,
-          $router: mockRouter
-        }
-      }
+          $router: mockRouter,
+        },
+      },
     });
 
     expect(axios.get).toHaveBeenCalledTimes(1);
@@ -151,28 +151,28 @@ describe("sparsest valid timdex record", () => {
       status: 200,
       data: {
         id: "002574584",
-        title: "Cheese"
-      }
+        title: "Cheese",
+      },
     };
 
     axios.get.mockImplementation(() => Promise.resolve(mockResponse));
 
     const mockRoute = {
       params: {
-        recordId: "002574584"
-      }
+        recordId: "002574584",
+      },
     };
     const mockRouter = {
-      push: jest.fn()
+      push: jest.fn(),
     };
 
     const wrapper = mount(Record, {
       global: {
         mocks: {
           $route: mockRoute,
-          $router: mockRouter
-        }
-      }
+          $router: mockRouter,
+        },
+      },
     });
 
     expect(axios.get).toHaveBeenCalledTimes(1);
@@ -198,28 +198,28 @@ describe("invalid timdex record", () => {
       status: 200,
       data: {
         languages: ["English"],
-        physical_description: "Dusty old box of cheese"
-      }
+        physical_description: "Dusty old box of cheese",
+      },
     };
 
     axios.get.mockImplementation(() => Promise.resolve(mockResponse));
 
     const mockRoute = {
       params: {
-        recordId: "002574584"
-      }
+        recordId: "002574584",
+      },
     };
     const mockRouter = {
-      push: jest.fn()
+      push: jest.fn(),
     };
 
     const wrapper = mount(Record, {
       global: {
         mocks: {
           $route: mockRoute,
-          $router: mockRouter
-        }
-      }
+          $router: mockRouter,
+        },
+      },
     });
 
     expect(axios.get).toHaveBeenCalledTimes(1);

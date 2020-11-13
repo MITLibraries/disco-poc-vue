@@ -18,29 +18,29 @@ export default {
   },
   data() {
     return {
-      trail: []
+      trail: [],
     };
   },
   methods: {
-    add: function(link) {
+    add: function (link) {
       this.trail.push({
         text: link.text,
-        url: link.url
+        url: link.url,
       });
     },
-    reset: function() {
+    reset: function () {
       this.trail = [
         {
           text: "Libraries home",
-          url: "https://libraries.mit.edu/"
+          url: "https://libraries.mit.edu/",
         },
         {
           text: "Search",
-          url: "/"
-        }
+          url: "/",
+        },
       ];
-    }
-  }
+    },
+  },
 };
 </script>
 

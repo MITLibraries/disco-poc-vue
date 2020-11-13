@@ -14,20 +14,18 @@ if (process.env.VUE_APP_SENTRY_DSN) {
     integrations: [
       new VueIntegration({
         Vue,
-        tracing: true
+        tracing: true,
       }),
-      new Integrations.BrowserTracing()
+      new Integrations.BrowserTracing(),
     ],
 
     // We recommend adjusting this value in production, or using tracesSampler
     // for finer control
-    tracesSampleRate: 1.0
+    tracesSampleRate: 1.0,
   });
 }
 
-createApp(App)
-  .use(router)
-  .mount("#app");
+createApp(App).use(router).mount("#app");
 
 // Uncomment this line to guarantee that a message is sent to Sentry.
 // myUndefinedFunction();
