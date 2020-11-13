@@ -6,49 +6,33 @@
       }}</router-link>
     </h3>
     <p>{{ result.content_type }} | {{ result.publication_date }}</p>
-    <ul class="list-inline-pipe contributors">
+    <ul v-if="result.contributors" class="list-inline-pipe contributors">
       <li
         v-for="contributor in result.contributors"
         v-bind:key="contributor.value"
       >
-        {{ contributor.value }} ({{ contributor.kind }})
+        {{ contributor.value }} ({{ contributor.kind || "contributor" }})
       </li>
     </ul>
-    <ul class="list-unbulleted copy-sup">
+    <ul v-if="result.subjects" class="list-unbulleted copy-sup">
       <li v-for="subject in result.subjects" v-bind:key="subject">
         {{ subject }}
       </li>
     </ul>
-    <p><a :href="result.source_link">View in Aleph</a></p>
-
-    <ItemStatus v-if="showStatus" msg="Item status field" />
-    <Button v-for="button in buttons" v-bind:key="button" msg="Button" />
+    <p v-if="result.source_link">
+      <a :href="result.source_link">View in {{ result.source || "source" }}</a>
+    </p>
   </div>
 </template>
 
 <script>
-import Button from "./Button.vue";
-import ItemStatus from "./ItemStatus.vue";
-
 export default {
   name: "Item",
-  components: {
-    Button,
-    ItemStatus
-  },
+  components: {},
   props: {
     result: Object
   },
-  computed: {
-    buttons: function() {
-      return [];
-    },
-    showStatus: function() {
-      return this.result.realtime_holdings_link == "Not Yet Implemented"
-        ? false
-        : true;
-    }
-  }
+  computed: {}
 };
 </script>
 
