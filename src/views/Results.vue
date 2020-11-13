@@ -30,6 +30,8 @@ import Facet from "@/components/Facet.vue";
 import Item from "@/components/Item.vue";
 import Pagination from "@/components/Pagination.vue";
 
+const axios = require("axios").default;
+
 export default {
   name: "Results",
   components: {
@@ -50,9 +52,6 @@ export default {
       }
     };
   },
-  props: {
-    rawQuery: String
-  },
   computed: {
     contentClass: function() {
       return this.showSidebar ? "col3q" : "content-main";
@@ -71,33 +70,29 @@ export default {
     fetchSearch: function() {
       this.query = this.$route.query.q;
       if (this.query) {
-        console.log(
-          "App has been instructed to do a search for '" + this.query + "'"
-        );
         this.results = [];
         this.searchTimdex(this.query);
       }
     },
-    searchTimdex: function(query) {
-      const axios = require("axios").default;
+    async searchTimdex(query) {
       this.status.loading = true;
-      axios
-        .get(String(process.env.VUE_APP_TIMDEX_API) + "/search?q=" + query)
-        .then(
-          response => (
-            (this.results = response.data.results),
-            (this.hits = response.data.hits),
-            this.$emit("results", { hits: this.hits, query: this.query })
-          )
-        )
-        .catch(
-          error => (
-            (this.status.errored = true),
-            (this.status.error_message = error),
-            (this.results = [])
-          )
-        )
-        .finally(() => (this.status.loading = false));
+      try {
+        let response = await axios.get(
+          String(process.env.VUE_APP_TIMDEX_API) + "/search?q=" + query
+        );
+
+        this.results = response.data.results;
+        this.hits = response.data.hits;
+        this.status.loading = false;
+        this.$emit("results", { hits: this.hits, query: this.query });
+      } catch (error) {
+        this.status.errored = true;
+        this.status.loading = false;
+        this.results = [];
+        this.status.error_message = error;
+        this.status.error_message =
+          "Starting over may help. If it does not, please let us know!";
+      }
     }
   },
   created() {
@@ -108,5 +103,3 @@ export default {
   }
 };
 </script>
-
-<style scoped lang="scss"></style>
