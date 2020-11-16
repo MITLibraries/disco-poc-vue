@@ -14,6 +14,9 @@
       <Facet v-for="facet in facets" v-bind:facet="facet" v-bind:key="facet" />
     </div>
     <div v-bind:class="contentClass">
+      <div v-if="hits == 0">
+        <p>Sorry, no results found for {{ query }}.</p>
+      </div>
       <Item
         v-for="(result, index) in results"
         v-bind:result="result"
@@ -42,7 +45,7 @@ export default {
   data() {
     return {
       facets: [],
-      hits: 0,
+      hits: null,
       results: [],
       results_per_page: process.env.VUE_APP_RESULTS_PER_PAGE || 5,
       status: {
