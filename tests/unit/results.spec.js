@@ -11,7 +11,7 @@ afterEach(() => {
 });
 
 describe("Results.vue", () => {
-  it("returns no results", async () => {
+  it("returns no results with friendly message", async () => {
     mockResponse = {
       status: 200,
       data: {
@@ -50,6 +50,7 @@ describe("Results.vue", () => {
       expect(wrapper.vm.$data.status.loading).toBe(false);
       expect(wrapper.vm.$data.hits).toBe(0);
       expect(wrapper.vm.$data.results.length).toBe(0);
+      expect(wrapper.text()).toMatch("Sorry, no results found for obscura.");
     });
   });
 
