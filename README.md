@@ -11,10 +11,11 @@ This repository will focus on the `DISCO UI` portion of this work.
 ## Environment variables
 
 ### Required
+
 `VUE_APP_TIMDEX_API`: the root URL for the TIMDEX API
 
 ### Optional
-`VUE_APP_RESULTS_PER_PAGE`: the number of records displayed per page
+
 `VUE_APP_SENTRY_DSN`: set to Sentry project key to log exceptions
 
 ## Project setup
