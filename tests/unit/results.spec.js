@@ -206,4 +206,47 @@ describe("Results.vue", () => {
       expect(wrapper.text()).toMatch("Starting over may help");
     });
   });
+
+  it("uses brackets syntax in query strings for TIMDEX", async () => {
+    mockResponse = {
+      status: 200,
+      data: {
+        hits: 0,
+        results: [],
+      },
+    };
+
+    axios.get.mockImplementation(() => Promise.reject(mockResponse));
+
+    const mockRoute = {
+      query: {
+        q: "cheese",
+        language: "english",
+        contributor: ["cow", "goat"],
+        content_type: "text",
+      },
+    };
+    const mockRouter = {
+      push: jest.fn(),
+    };
+
+    const wrapper = mount(Results, {
+      global: {
+        mocks: {
+          $route: mockRoute,
+          $router: mockRouter,
+        },
+      },
+    });
+
+    expect(axios.get).toHaveBeenCalledTimes(1);
+
+    expect(axios.get).toHaveBeenCalledWith(
+      "https://timdex.example.com/api/v1/search?q=cheese&language%5B%5D=english&contributor%5B%5D=cow&contributor%5B%5D=goat&content_type=text"
+    );
+
+    await wrapper.vm.$nextTick(() => {
+      expect(wrapper.vm.$data.status.loading).toBe(false);
+    });
+  });
 });

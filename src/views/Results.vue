@@ -1,5 +1,5 @@
 <template>
-  <div v-bind:class="layoutClass">
+  <div :class="layoutClass">
     <div v-if="status.loading" class="panel panel-info">
       <div class="panel-heading">Loading...</div>
     </div>
@@ -11,7 +11,13 @@
       </div>
     </div>
     <div v-if="showSidebar" class="col1q">
-      <Facet v-for="facet in facets" v-bind:facet="facet" v-bind:key="facet" />
+      <Facet
+        v-for="(facetList, facetHeader, index) in facetLists"
+        :facetList="facetList"
+        :facetHeader="facetHeader"
+        :key="index"
+      >
+      </Facet>
     </div>
     <div v-bind:class="contentClass" v-if="this.status.loading == false">
       <SearchMetadata v-model:searchterm="searchterm" v-model:hits="hits" />
@@ -20,9 +26,9 @@
       </div>
       <Item
         v-for="(result, index) in results"
-        v-bind:result="result"
-        v-bind:index="index"
-        v-bind:key="result.id"
+        :result="result"
+        :index="index"
+        :key="result.id"
       />
       <Pagination :hits="hits" :per_page="per_page" />
     </div>
@@ -34,8 +40,8 @@ import Facet from "@/components/Facet.vue";
 import Item from "@/components/Item.vue";
 import Pagination from "@/components/Pagination.vue";
 import SearchMetadata from "@/components/SearchMetadata.vue";
-var qs = require("qs");
 
+const qs = require("qs");
 const axios = require("axios").default;
 
 export default {
@@ -48,10 +54,10 @@ export default {
   },
   data() {
     return {
-      facets: [],
       hits: null,
       page: this.$route.query.page || "1",
       results: [],
+      facetLists: [],
       per_page: 20,
       status: {
         error_message: "",
@@ -68,7 +74,7 @@ export default {
       return this.showSidebar ? "layout-1q3q" : "";
     },
     showSidebar: function () {
-      return this.facets.length ? true : false;
+      return this.facetLists ? true : false;
     },
   },
   methods: {
@@ -77,10 +83,25 @@ export default {
       this.searchterm = this.$route.query.q;
       try {
         let timdexURL = String(process.env.VUE_APP_TIMDEX_API) + "/search?";
-        let query = qs.stringify(this.$route.query);
+        let newQuery = this.$route.query;
+
+        // TIMDEX needs facets that accept arrays to always be arrays
+        for (let param in newQuery) {
+          if (
+            (param == "contributor" ||
+              param == "content_format" ||
+              param == "language" ||
+              param == "subject") &&
+            typeof newQuery[param] == "string"
+          ) {
+            newQuery[param] = newQuery[param].split();
+          }
+        }
+        let query = qs.stringify(newQuery, { arrayFormat: "brackets" });
         let response = await axios.get(timdexURL + query);
         this.results = response.data.results;
         this.hits = response.data.hits;
+        this.facetLists = response.data.aggregations;
         this.status.loading = false;
       } catch (error) {
         this.status.errored = true;

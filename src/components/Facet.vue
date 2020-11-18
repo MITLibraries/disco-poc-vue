@@ -1,25 +1,70 @@
 <template>
-  <div class="facet component">
-    <p>{{ facetTitle }}</p>
-  </div>
+  <dl v-if="facetList && facetList.length" class="facet">
+    <dt>{{ facetHeader }}</dt>
+    <dd v-for="(facet, index) in facetList" :key="index">
+      <input
+        type="checkbox"
+        :id="facetHeader + '_' + facet.name"
+        :value="facet.name"
+        v-model="checkedFacets"
+      />
+      <label :for="facetHeader + '_' + facet.name">
+        {{ facet.name }} {{ "(" + facet.count + ")" }}</label
+      >
+    </dd>
+  </dl>
 </template>
 
 <script>
 export default {
   name: "Facet",
-  props: {
-    facet: String,
+  data() {
+    return {
+      checkedFacets: [],
+    };
   },
-  computed: {
-    facetTitle: function () {
-      return this.facet + " facet";
+  props: {
+    facetList: Array,
+    facetHeader: String,
+  },
+  methods: {
+    applyFacets: function () {
+      let facetHeader = this.facetHeader;
+      let facetsToApply;
+
+      // facetsToApply needs to be a string for some facets and an array for
+      // others, or else the TIMDEX call will fail
+      if (
+        facetHeader == "content_type" ||
+        facetHeader == "literary_form" ||
+        facetHeader == "source"
+      ) {
+        facetsToApply = this.checkedFacets[0];
+      } else {
+        facetsToApply = this.checkedFacets;
+      }
+
+      // We need to copy the route query instead of assigning it to a variable
+      // for Vue reasons
+      const newQuery = Object.assign({}, this.$route.query);
+      newQuery["page"] = 1;
+
+      if (facetsToApply && facetsToApply.length) {
+        newQuery[facetHeader] = facetsToApply;
+      } else {
+        delete newQuery[facetHeader];
+      }
+
+      this.$router.push({ query: newQuery });
     },
+  },
+  mounted() {
+    this.$watch(
+      () => this.checkedFacets,
+      () => {
+        this.applyFacets();
+      }
+    );
   },
 };
 </script>
-
-<style scoped>
-.facet {
-  border-color: blue;
-}
-</style>
