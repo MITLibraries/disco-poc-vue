@@ -197,7 +197,7 @@ describe("Results.vue", () => {
     expect(axios.get).toHaveBeenCalledTimes(1);
 
     expect(axios.get).toHaveBeenCalledWith(
-      "https://timdex.example.com/api/v1/search?q=snow crash"
+      "https://timdex.example.com/api/v1/search?q=snow%20crash"
     );
 
     await wrapper.vm.$nextTick(() => {

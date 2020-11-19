@@ -13,7 +13,7 @@
     <div v-if="showSidebar" class="col1q">
       <Facet v-for="facet in facets" v-bind:facet="facet" v-bind:key="facet" />
     </div>
-    <div v-bind:class="contentClass">
+    <div v-bind:class="contentClass" v-if="this.status.loading == false">
       <div v-if="hits == 0">
         <p>Sorry, no results found for {{ query }}.</p>
       </div>
@@ -23,7 +23,7 @@
         v-bind:index="index"
         v-bind:key="result.id"
       />
-      <Pagination v-if="showPagination" msg="Pagination bar" />
+      <Pagination :hits="hits" :page="page" :per_page="per_page" />
     </div>
   </div>
 </template>
@@ -32,6 +32,7 @@
 import Facet from "@/components/Facet.vue";
 import Item from "@/components/Item.vue";
 import Pagination from "@/components/Pagination.vue";
+var qs = require("qs");
 
 const axios = require("axios").default;
 
@@ -46,8 +47,9 @@ export default {
     return {
       facets: [],
       hits: null,
+      page: this.$route.query.page || "1",
       results: [],
-      results_per_page: process.env.VUE_APP_RESULTS_PER_PAGE || 5,
+      per_page: 20,
       status: {
         error_message: "",
         errored: false,
@@ -63,31 +65,23 @@ export default {
       return this.showSidebar ? "layout-1q3q" : "";
     },
     showPagination: function () {
-      return this.hits > this.results_per_page ? true : false;
+      return this.hits > 0;
     },
     showSidebar: function () {
       return this.facets.length ? true : false;
     },
   },
   methods: {
-    fetchSearch: function () {
-      this.query = this.$route.query.q;
-      if (this.query) {
-        this.results = [];
-        this.searchTimdex(this.query);
-      }
-    },
-    async searchTimdex(query) {
+    async searchTimdex() {
       this.status.loading = true;
       try {
-        let response = await axios.get(
-          String(process.env.VUE_APP_TIMDEX_API) + "/search?q=" + query
-        );
-
+        let timdexURL = String(process.env.VUE_APP_TIMDEX_API) + "/search?";
+        let query = qs.stringify(this.$route.query);
+        let response = await axios.get(timdexURL + query);
         this.results = response.data.results;
         this.hits = response.data.hits;
         this.status.loading = false;
-        this.$emit("results", { hits: this.hits, query: this.query });
+        this.query = this.$route.query.q;
       } catch (error) {
         this.status.errored = true;
         this.status.loading = false;
@@ -99,10 +93,10 @@ export default {
     },
   },
   created() {
-    this.fetchSearch();
+    this.searchTimdex();
   },
   watch: {
-    $route: "fetchSearch",
+    $route: "searchTimdex",
   },
 };
 </script>

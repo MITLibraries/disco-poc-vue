@@ -62,7 +62,6 @@ export default {
       hits: 0,
       query: "",
       record: undefined,
-      results_per_page: process.env.VUE_APP_RESULTS_PER_PAGE || 5,
       relateds: [],
       results: [],
       status: {
@@ -76,7 +75,7 @@ export default {
   methods: {
     receiveSearch: function (query) {
       this.query = query;
-      this.$router.push({ name: "Results", query: { q: this.query } });
+      this.$router.push({ name: "Results", query: { q: this.query, page: 1 } });
     },
     receiveSummary: function (data) {
       this.hits = data.hits;
@@ -115,8 +114,4 @@ export default {
 <style>
 @import "./assets/css/bento.min.css";
 @import "./assets/css/libraries-main.min.css";
-
-.component {
-  border: 0.4rem solid black;
-}
 </style>
