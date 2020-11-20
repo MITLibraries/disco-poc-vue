@@ -234,4 +234,30 @@ describe("Pagination.vue", () => {
       query: { page: "1", q: "obscura" },
     });
   });
+
+  it("displays only next when on first page of results when page not set", () => {
+    const mockRoute = {
+      query: { q: "obscura" },
+    };
+    const mockRouter = {
+      push: jest.fn(),
+    };
+
+    const wrapper = shallowMount(Pagination, {
+      global: {
+        mocks: {
+          $route: mockRoute,
+          $router: mockRouter,
+        },
+      },
+      props: {
+        hits: 25,
+        per_page: 20,
+      },
+    });
+
+    expect(wrapper.text()).toMatch("Next");
+    expect(wrapper.text()).not.toMatch("Previous");
+    expect(wrapper.text()).not.toMatch("First");
+  });
 });

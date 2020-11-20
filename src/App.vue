@@ -6,23 +6,10 @@
       <div class="wrap-content">
         <div class="layout-band">
           <SearchForm @searched="receiveSearch" />
-          <SearchMetadata
-            v-if="showSearchMetadata"
-            v-model:query.lazy="query"
-            v-model:status="status"
-            v-model:hits="hits"
-          />
         </div>
         <div v-bind:class="layoutBand">
           <div v-bind:class="layoutContent">
             <router-view @results="receiveSummary" />
-          </div>
-          <div v-if="sidebarRight" class="col1q-r">
-            <Related
-              v-for="related in relateds"
-              v-bind:related="related"
-              v-bind:key="related"
-            />
           </div>
         </div>
         <Help v-if="help" v-model="help" />
@@ -39,9 +26,7 @@ import Breadcrumb from "./components/Breadcrumb.vue";
 import Footer from "./components/Footer.vue";
 import Header from "./components/Header.vue";
 import Help from "./components/Help.vue";
-import Related from "./components/Related.vue";
 import SearchForm from "./components/SearchForm.vue";
-import SearchMetadata from "./components/SearchMetadata.vue";
 
 export default {
   name: "App",
@@ -51,25 +36,15 @@ export default {
     Footer,
     Header,
     Help,
-    Related,
     SearchForm,
-    SearchMetadata,
   },
   data() {
     return {
-      about: undefined,
-      help: undefined,
       hits: 0,
       query: "",
-      record: undefined,
-      relateds: [],
-      results: [],
-      status: {
-        error_message: "",
-        errored: false,
-        loading: false,
-        ready: false,
-      },
+      help: "",
+      about: "",
+      sidebarRight: false,
     };
   },
   methods: {
@@ -94,18 +69,6 @@ export default {
         return "col3q";
       }
       return "";
-    },
-    showSearchMetadata: function () {
-      if (this.query === "") {
-        return false;
-      }
-      if (this.status.errored === true) {
-        return false;
-      }
-      return true;
-    },
-    sidebarRight: function () {
-      return this.relateds.length ? true : false;
     },
   },
 };
