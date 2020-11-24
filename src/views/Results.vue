@@ -14,8 +14,9 @@
       <Facet v-for="facet in facets" v-bind:facet="facet" v-bind:key="facet" />
     </div>
     <div v-bind:class="contentClass" v-if="this.status.loading == false">
+      <SearchMetadata v-model:searchterm="searchterm" v-model:hits="hits" />
       <div v-if="hits == 0">
-        <p>Sorry, no results found for {{ query }}.</p>
+        <p>Sorry, no results found for {{ searchterm }}.</p>
       </div>
       <Item
         v-for="(result, index) in results"
@@ -23,7 +24,7 @@
         v-bind:index="index"
         v-bind:key="result.id"
       />
-      <Pagination :hits="hits" :page="page" :per_page="per_page" />
+      <Pagination :hits="hits" :per_page="per_page" />
     </div>
   </div>
 </template>
@@ -32,6 +33,7 @@
 import Facet from "@/components/Facet.vue";
 import Item from "@/components/Item.vue";
 import Pagination from "@/components/Pagination.vue";
+import SearchMetadata from "@/components/SearchMetadata.vue";
 var qs = require("qs");
 
 const axios = require("axios").default;
@@ -42,6 +44,7 @@ export default {
     Facet,
     Item,
     Pagination,
+    SearchMetadata,
   },
   data() {
     return {
@@ -64,9 +67,6 @@ export default {
     layoutClass: function () {
       return this.showSidebar ? "layout-1q3q" : "";
     },
-    showPagination: function () {
-      return this.hits > 0;
-    },
     showSidebar: function () {
       return this.facets.length ? true : false;
     },
@@ -74,6 +74,7 @@ export default {
   methods: {
     async searchTimdex() {
       this.status.loading = true;
+      this.searchterm = this.$route.query.q;
       try {
         let timdexURL = String(process.env.VUE_APP_TIMDEX_API) + "/search?";
         let query = qs.stringify(this.$route.query);
@@ -81,7 +82,6 @@ export default {
         this.results = response.data.results;
         this.hits = response.data.hits;
         this.status.loading = false;
-        this.query = this.$route.query.q;
       } catch (error) {
         this.status.errored = true;
         this.status.loading = false;

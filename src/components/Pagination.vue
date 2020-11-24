@@ -35,12 +35,14 @@ export default {
   name: "Pagination",
   props: {
     hits: Number,
-    page: String,
     per_page: Number,
   },
   methods: {
     pageNum() {
-      return parseInt(this.$route.query.page);
+      if (this.$route.query.page) {
+        return parseInt(this.$route.query.page);
+      }
+      return 1;
     },
     onlyPage() {
       if (this.hits <= this.per_page) {

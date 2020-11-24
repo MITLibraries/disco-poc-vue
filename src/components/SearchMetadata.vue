@@ -1,8 +1,10 @@
 <template>
-  <div v-bind:class="panelStatus" class="panel">
-    <div class="panel-heading">{{ panelHeading }}</div>
-    <div class="panel-body">"{{ query }}"</div>
-    <div class="panel-footer">{{ status }}</div>
+  <div class="panel panel-info">
+    <div class="panel-heading">Search Results</div>
+    <div class="panel-body">Searched for: "{{ searchterm }}"</div>
+    <div v-if="hits > 0" class="panel-footer">
+      Viewing records {{ start() }} to {{ end() }} of {{ hits }}
+    </div>
   </div>
 </template>
 
@@ -11,23 +13,23 @@ export default {
   name: "SearchMetadata",
   props: {
     hits: Number,
-    query: String,
-    status: Object,
+    searchterm: String,
   },
-  computed: {
-    panelHeading: function () {
-      if (this.status.ready == true) {
-        return "Results summary: " + this.hits + " results";
-      } else if (this.status.loading == true) {
-        return "Loading results...";
+  methods: {
+    page() {
+      if (this.$route.query.page) {
+        return parseInt(this.$route.query.page);
       }
-      return "Search Metadata:";
+      return 1;
     },
-    panelStatus: function () {
-      if (this.status.ready == true) {
-        return "panel-success";
-      }
-      return "panel-info";
+    per_page() {
+      return 20;
+    },
+    start() {
+      return this.per_page() * (this.page() - 1) + 1;
+    },
+    end() {
+      return Math.min(this.page() * this.per_page(), this.hits);
     },
   },
 };
