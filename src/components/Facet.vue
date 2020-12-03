@@ -57,14 +57,31 @@ export default {
 
       this.$router.push({ query: newQuery });
     },
+    updateFacetsFromURL: function (query) {
+      this.checkedFacets = [];
+      for (const param in query) {
+        if (this.facetHeader == param && typeof query[param] == "string") {
+          this.checkedFacets.push(query[param]);
+        } else if (this.facetHeader == param && Array.isArray(query[param])) {
+          query[param].forEach((facet) => {
+            this.checkedFacets.push(facet);
+          });
+        }
+      }
+    },
   },
   mounted() {
-    this.$watch(
-      () => this.checkedFacets,
-      () => {
-        this.applyFacets();
-      }
-    );
+    if (this.$route.query) {
+      this.updateFacetsFromURL(this.$route.query);
+    }
+  },
+  watch: {
+    $route(to) {
+      this.updateFacetsFromURL(to.query);
+    },
+    checkedFacets() {
+      this.applyFacets();
+    },
   },
 };
 </script>
