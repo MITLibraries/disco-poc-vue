@@ -207,7 +207,7 @@ describe("Results.vue", () => {
     });
   });
 
-  it("uses brackets syntax in query strings for TIMDEX", async () => {
+  it("uses brackets syntax where appropriate in query strings", async () => {
     mockResponse = {
       status: 200,
       data: {
