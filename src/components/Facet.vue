@@ -77,7 +77,9 @@ export default {
   },
   watch: {
     $route(to) {
-      this.updateFacetsFromURL(to.query);
+      if (to.query) {
+        this.updateFacetsFromURL(to.query);
+      }
     },
     checkedFacets() {
       this.applyFacets();

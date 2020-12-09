@@ -105,11 +105,6 @@ describe("Facet.vue", () => {
         facetList: [{ name: "english", count: 1 }],
         facetHeader: "language",
       },
-      data() {
-        return {
-          checkedFacets: [],
-        };
-      },
     });
 
     expect(wrapper.vm.$data.checkedFacets).toContain("english");
@@ -142,5 +137,134 @@ describe("Facet.vue", () => {
     });
 
     expect(wrapper.vm.$data.checkedFacets).toEqual([]);
+  });
+
+  it("applies facets as strings when required", async () => {
+    const mockRoute = {
+      query: { q: "cheese", page: "1" },
+    };
+    const mockRouter = {
+      push: jest.fn(),
+    };
+
+    const wrapper = shallowMount(Facet, {
+      global: {
+        mocks: {
+          $route: mockRoute,
+          $router: mockRouter,
+        },
+      },
+      props: {
+        facetList: [{ name: "cave in Switzerland", count: 1 }],
+        facetHeader: "source",
+      },
+    });
+
+    const checkbox = wrapper.find(
+      'input[type="checkbox"][value="cave in Switzerland"]'
+    );
+
+    await checkbox.setValue(true);
+
+    expect(wrapper.vm.checkedFacets).toEqual(["cave in Switzerland"]);
+    expect(mockRouter.push).toHaveBeenCalledWith({
+      query: { page: 1, q: "cheese", source: "cave in Switzerland" },
+    });
+  });
+
+  it("applies facets as arrays when required", async () => {
+    const mockRoute = {
+      query: { q: "cheese", page: "1" },
+    };
+    const mockRouter = {
+      push: jest.fn(),
+    };
+
+    const wrapper = shallowMount(Facet, {
+      global: {
+        mocks: {
+          $route: mockRoute,
+          $router: mockRouter,
+        },
+      },
+      props: {
+        facetList: [{ name: "romansh", count: 1 }],
+        facetHeader: "language",
+      },
+    });
+
+    const checkbox = wrapper.find('input[type="checkbox"][value="romansh"]');
+
+    await checkbox.setValue(true);
+
+    expect(wrapper.vm.checkedFacets).toEqual(["romansh"]);
+    expect(mockRouter.push).toHaveBeenCalledWith({
+      query: { page: 1, q: "cheese", language: ["romansh"] },
+    });
+  });
+
+  it("reverts to page 1 when a facet is applied", async () => {
+    const mockRoute = {
+      query: { q: "cheese", page: "5" },
+    };
+    const mockRouter = {
+      push: jest.fn(),
+    };
+
+    const wrapper = shallowMount(Facet, {
+      global: {
+        mocks: {
+          $route: mockRoute,
+          $router: mockRouter,
+        },
+      },
+      props: {
+        facetList: [{ name: "romansh", count: 1 }],
+        facetHeader: "language",
+      },
+    });
+
+    const checkbox = wrapper.find('input[type="checkbox"][value="romansh"]');
+
+    await checkbox.setValue(true);
+
+    expect(mockRouter.push).toHaveBeenCalledWith({
+      query: { page: 1, q: "cheese", language: ["romansh"] },
+    });
+  });
+
+  it("reverts to page 1 when a facet is removed", async () => {
+    const mockRoute = {
+      query: { q: "cheese", page: "5" },
+    };
+    const mockRouter = {
+      push: jest.fn(),
+    };
+
+    const wrapper = shallowMount(Facet, {
+      global: {
+        mocks: {
+          $route: mockRoute,
+          $router: mockRouter,
+        },
+      },
+      props: {
+        facetList: [{ name: "romansh", count: 1 }],
+        facetHeader: "language",
+      },
+    });
+
+    const checkbox = wrapper.find('input[type="checkbox"][value="romansh"]');
+
+    await checkbox.setValue(true);
+
+    expect(wrapper.vm.$data.checkedFacets).toEqual(["romansh"]);
+
+    await checkbox.setValue(false);
+
+    expect(wrapper.vm.$data.checkedFacets).toEqual([]);
+    expect(mockRouter.push).toHaveBeenCalledWith({
+      query: { page: 1, q: "cheese" },
+    });
   });
 });
