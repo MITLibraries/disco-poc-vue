@@ -2,7 +2,7 @@
   <div>
     <form @submit.prevent class="form-group">
       <label for="b-search-main" class="field-label"
-        >Search the MIT Libraries</label
+        >Search MIT's Distinctive Collections</label
       >
       <div class="form-horizontal">
         <input
