@@ -8,18 +8,24 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Install packages
-      run: yarn install
-    - name: Run tests
-      run: yarn test:unit
-    - name: build
-      run: yarn build
+      - uses: actions/checkout@v2
+      - name: Install packages
+        run: yarn install
+      - name: Run tests
+        run: yarn test:unit --no-cache --coverage
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./coverage/lcov.info
+      - name: build
+        run: yarn build
+
   lint:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Install packages
-      run: yarn install
-    - name: Run linter
-      run: yarn lint --no-fix --max-warnings 0
+      - uses: actions/checkout@v2
+      - name: Install packages
+        run: yarn install
+      - name: Run linter
+        run: yarn lint --no-fix --max-warnings 0
