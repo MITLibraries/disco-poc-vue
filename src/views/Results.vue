@@ -15,6 +15,7 @@
         v-for="(facetList, facetHeader, index) in facetLists"
         :facetList="facetList"
         :facetHeader="facetHeader"
+        :facetDisplayName="facetHeaderFixer(facetHeader)"
         :key="index"
       >
       </Facet>
@@ -110,6 +111,21 @@ export default {
         this.status.error_message = error;
         this.status.error_message =
           "Starting over may help. If it does not, please let us know!";
+      }
+    },
+    facetHeaderFixer: function (facetHeader) {
+      if (facetHeader == "content_type") {
+        return "Content type";
+      } else if (facetHeader == "contributor") {
+        return "Author/contributor";
+      } else if (facetHeader == "literary_form") {
+        return "Literary form";
+      } else if (facetHeader == "content_format") {
+        return "Format";
+      } else if (facetHeader == "source") {
+        return "Source of data";
+      } else {
+        return facetHeader.charAt(0).toUpperCase() + facetHeader.slice(1);
       }
     },
   },

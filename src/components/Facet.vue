@@ -1,6 +1,6 @@
 <template>
   <dl v-if="facetList && facetList.length" class="facet">
-    <dt>{{ facetHeader }}</dt>
+    <dt>{{ facetDisplayName }}</dt>
     <dd v-for="(facet, index) in facetList" :key="index">
       <input
         type="checkbox"
@@ -29,6 +29,7 @@ export default {
   props: {
     facetList: Array,
     facetHeader: String,
+    facetDisplayName: String,
   },
   methods: {
     applyFacets: function () {
