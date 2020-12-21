@@ -208,7 +208,7 @@ describe("Pagination.vue", () => {
     });
   });
 
-  it("goes to previous page when previous is clicked", () => {
+  it("goes to first page when first is clicked", () => {
     const mockRoute = {
       query: { q: "obscura", page: "3" },
     };

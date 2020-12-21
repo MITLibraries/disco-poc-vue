@@ -117,7 +117,9 @@ export default {
     this.searchTimdex();
   },
   watch: {
-    $route: "searchTimdex",
+    $route() {
+      this.searchTimdex();
+    },
   },
 };
 </script>
