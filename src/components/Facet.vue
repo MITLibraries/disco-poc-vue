@@ -16,11 +16,14 @@
 </template>
 
 <script>
+const _ = require("lodash");
+
 export default {
   name: "Facet",
   data() {
     return {
       checkedFacets: [],
+      facetsUpdatedFromURL: false,
     };
   },
   props: {
@@ -47,7 +50,11 @@ export default {
       // We need to copy the route query instead of assigning it to a variable
       // for Vue reasons
       const newQuery = Object.assign({}, this.$route.query);
-      newQuery["page"] = 1;
+
+      // Set page to 1 unless facets were updated from URL
+      if (this.facetsUpdatedFromURL == false) {
+        newQuery["page"] = "1";
+      }
 
       if (facetsToApply && facetsToApply.length) {
         newQuery[facetHeader] = facetsToApply;
@@ -56,18 +63,28 @@ export default {
       }
 
       this.$router.push({ query: newQuery });
+      this.facetsUpdatedFromURL = false;
     },
     updateFacetsFromURL: function (query) {
       this.checkedFacets = [];
-      for (const param in query) {
-        if (this.facetHeader == param && typeof query[param] == "string") {
-          this.checkedFacets.push(query[param]);
-        } else if (this.facetHeader == param && Array.isArray(query[param])) {
-          query[param].forEach((facet) => {
+      const facetParams = _.omit(query, ["page", "q"]);
+
+      for (const param in facetParams) {
+        if (
+          this.facetHeader == param &&
+          typeof facetParams[param] == "string"
+        ) {
+          this.checkedFacets.push(facetParams[param]);
+        } else if (
+          this.facetHeader == param &&
+          Array.isArray(facetParams[param])
+        ) {
+          facetParams[param].forEach((facet) => {
             this.checkedFacets.push(facet);
           });
         }
       }
+      this.facetsUpdatedFromURL = true;
     },
   },
   mounted() {
