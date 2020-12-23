@@ -1,7 +1,7 @@
 <template>
-  <dl v-if="facetList && facetList.length" class="facet">
+  <dl v-if="facetList && facetList.length" class="list-unbulleted">
     <dt>{{ facetDisplayName }}</dt>
-    <dd v-for="(facet, index) in facetList" :key="index">
+    <dd v-for="(facet, index) in facetList" :key="index" class="copy-sup">
       <input
         type="checkbox"
         :id="facetHeader + '_' + facet.name"
@@ -105,3 +105,10 @@ export default {
   },
 };
 </script>
+
+<style>
+.wrap-content dt,
+.wrap-content dd {
+  margin-bottom: 0.5em;
+}
+</style>
