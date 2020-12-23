@@ -106,9 +106,19 @@ export default {
 };
 </script>
 
-<style>
-.wrap-content dt,
-.wrap-content dd {
-  margin-bottom: 0.5em;
+<style lang="scss">
+.wrap-content {
+  dd {
+    align-items: flex-start;
+    display: flex;
+    margin-bottom: 0.5em;
+
+    input {
+      margin: 0 0.5em;
+    }
+  }
+  dt {
+    margin-bottom: 0.5em;
+  }
 }
 </style>
