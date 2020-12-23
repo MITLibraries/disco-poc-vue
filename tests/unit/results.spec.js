@@ -249,4 +249,161 @@ describe("Results.vue", () => {
       expect(wrapper.vm.$data.status.loading).toBe(false);
     });
   });
+
+  it("translates facet headers to display versions", async () => {
+    mockResponse = {
+      status: 200,
+      data: {
+        hits: 2,
+        results: [
+          {
+            id: "002574584",
+            title: "Cheese",
+            source: "MIT Aleph",
+          },
+          {
+            id: "002574585",
+            title: "Fromage",
+            source: "MIT Aleph",
+          },
+        ],
+        aggregations: {
+          source: [
+            {
+              name: "mit aleph",
+              count: 143,
+            },
+          ],
+          content_format: [
+            {
+              name: "print volume",
+              count: 36,
+            },
+            {
+              name: "dvd-rom",
+              count: 5,
+            },
+          ],
+          subject: [
+            {
+              name: "children's songs.",
+              count: 3,
+            },
+            {
+              name: "cooking.",
+              count: 2,
+            },
+            {
+              name: "motion pictures.",
+              count: 2,
+            },
+          ],
+          contributor: [
+            {
+              name: "marvin, frankie.",
+              count: 12,
+            },
+            {
+              name: "brown, james, 1933-2006.",
+              count: 9,
+            },
+            {
+              name: "djll, tom.",
+              count: 7,
+            },
+            {
+              name: "dexter, al.",
+              count: 4,
+            },
+          ],
+          content_type: [
+            {
+              name: "text",
+              count: 100,
+            },
+            {
+              name: "sound recording",
+              count: 28,
+            },
+          ],
+          collection: [
+            {
+              name: "lint",
+              count: 111,
+            },
+            {
+              name: "fuzz",
+              count: 111,
+            },
+          ],
+          language: [
+            {
+              name: "english",
+              count: 111,
+            },
+            {
+              name: "french",
+              count: 22,
+            },
+            {
+              name: "no linguistic content",
+              count: 9,
+            },
+          ],
+          literary_form: [
+            {
+              name: "fiction",
+              count: 81,
+            },
+            {
+              name: "nonfiction",
+              count: 62,
+            },
+          ],
+        },
+      },
+    };
+
+    axios.get.mockImplementation(() => Promise.resolve(mockResponse));
+
+    const mockRoute = {
+      query: { q: "cheese" },
+    };
+    const mockRouter = {
+      push: jest.fn(),
+    };
+
+    const wrapper = mount(Results, {
+      global: {
+        components: {
+          RouterLink: RouterLinkStub,
+        },
+        mocks: {
+          $route: mockRoute,
+          $router: mockRouter,
+        },
+      },
+    });
+
+    expect(axios.get).toHaveBeenCalledTimes(1);
+
+    expect(axios.get).toHaveBeenCalledWith(
+      "https://timdex.example.com/api/v1/search?q=cheese"
+    );
+
+    expect(wrapper.vm.$data.status.loading).toBe(true);
+
+    await wrapper.vm.$nextTick(() => {
+      expect(wrapper.vm.$data.status.loading).toBe(false);
+      expect(wrapper.vm.$data.hits).toBe(2);
+      expect(wrapper.text()).toMatch("Source of data");
+      expect(wrapper.text()).toMatch("Format");
+      expect(wrapper.text()).toMatch("Subject");
+      expect(wrapper.text()).toMatch("Author/contributor");
+      expect(wrapper.text()).toMatch("Collection");
+      expect(wrapper.text()).toMatch("Language");
+      expect(wrapper.text()).toMatch("Content type");
+      expect(wrapper.text()).toMatch("Literary form");
+    });
+  });
 });

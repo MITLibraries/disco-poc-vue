@@ -23,10 +23,11 @@ describe("Facet.vue", () => {
           { name: "french", count: 2 },
         ],
         facetHeader: "language",
+        facetDisplayName: "Language",
       },
     });
 
-    expect(wrapper.text()).toMatch("language");
+    expect(wrapper.text()).toMatch("Language");
     expect(wrapper.text()).toMatch("english (1)");
     expect(wrapper.text()).toMatch("french (2)");
   });
