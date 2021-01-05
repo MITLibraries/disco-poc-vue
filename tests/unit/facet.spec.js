@@ -32,6 +32,36 @@ describe("Facet.vue", () => {
     expect(wrapper.text()).toMatch("french (2)");
   });
 
+  it("normalizes sources", () => {
+    const mockRoute = {
+      query: { q: "cheese", page: "1" },
+    };
+    const mockRouter = {
+      push: jest.fn(),
+    };
+
+    const wrapper = shallowMount(Facet, {
+      global: {
+        mocks: {
+          $route: mockRoute,
+          $router: mockRouter,
+        },
+      },
+      props: {
+        facetList: [
+          { name: "mit aleph", count: 1 },
+          { name: "dspace@mit", count: 2 },
+          { name: "mit archivesspace", count: 3 },
+        ],
+        facetHeader: "source",
+      },
+    });
+
+    expect(wrapper.text()).toMatch("MIT Barton Catalog (1)");
+    expect(wrapper.text()).toMatch("DSpace@MIT (2)");
+    expect(wrapper.text()).toMatch("MIT ArchivesSpace (3)");
+  });
+
   it("hides facet list if no facets are available", () => {
     const mockRoute = {
       query: { q: "cheese", page: "1" },

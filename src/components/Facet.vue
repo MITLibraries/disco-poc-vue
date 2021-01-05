@@ -9,7 +9,7 @@
         v-model="checkedFacets"
       />
       <label :for="facetHeader + '_' + facet.name">
-        {{ facet.name }} {{ "(" + facet.count + ")" }}</label
+        {{ normalizeSource(facet.name) }} {{ "(" + facet.count + ")" }}</label
       >
     </dd>
   </dl>
@@ -86,6 +86,19 @@ export default {
         }
       }
       this.facetsUpdatedFromURL = true;
+    },
+    normalizeSource: function (source) {
+      if (this.facetHeader == "source") {
+        if (source == "mit aleph") {
+          return "MIT Barton Catalog";
+        } else if (source == "dspace@mit") {
+          return "DSpace@MIT";
+        } else if (source == "mit archivesspace") {
+          return "MIT ArchivesSpace";
+        }
+      } else {
+        return source;
+      }
     },
   },
   mounted() {

@@ -244,4 +244,88 @@ describe("Item.vue", () => {
     expect(wrapper.text()).toMatch("Lastoson, Firsty (Creator)");
     expect(wrapper.text()).toMatch("Namenamenamename (contributor)");
   });
+
+  it("normalizes MIT Aleph source to MIT Barton Catalog", () => {
+    const $router = {
+      push: jest.fn(),
+    };
+    const $route = {
+      params: {
+        recordId: "000544411",
+      },
+    };
+
+    const result = {
+      title: "The great American novel",
+      source: "MIT Aleph",
+      source_link: "http://library.mit.edu/item/000544411",
+    };
+
+    const wrapper = mount(Item, {
+      global: {
+        components: {
+          RouterLink: RouterLinkStub,
+        },
+        mocks: { $route, $router },
+      },
+      props: { result },
+    });
+    expect(wrapper.text()).toMatch("MIT Barton Catalog");
+  });
+
+  it("does not attempt to normalize DSpace@MIT source", () => {
+    const $router = {
+      push: jest.fn(),
+    };
+    const $route = {
+      params: {
+        recordId: "000544411",
+      },
+    };
+
+    const result = {
+      title: "The great American novel",
+      source: "DSpace@MIT",
+      source_link: "http://library.mit.edu/item/000544411",
+    };
+
+    const wrapper = mount(Item, {
+      global: {
+        components: {
+          RouterLink: RouterLinkStub,
+        },
+        mocks: { $route, $router },
+      },
+      props: { result },
+    });
+    expect(wrapper.text()).toMatch("DSpace@MIT");
+  });
+
+  it("does not attempt to normalize MIT ArchivesSpace source", () => {
+    const $router = {
+      push: jest.fn(),
+    };
+    const $route = {
+      params: {
+        recordId: "000544411",
+      },
+    };
+
+    const result = {
+      title: "The great American novel",
+      source: "MIT ArchivesSpace",
+      source_link: "http://library.mit.edu/item/000544411",
+    };
+
+    const wrapper = mount(Item, {
+      global: {
+        components: {
+          RouterLink: RouterLinkStub,
+        },
+        mocks: { $route, $router },
+      },
+      props: { result },
+    });
+    expect(wrapper.text()).toMatch("MIT ArchivesSpace");
+  });
 });
