@@ -91,7 +91,10 @@
               >{{ result.physical_description }}
             </li>
 
-            <li><span class="label">Database: </span>{{ result.source }}</li>
+            <li>
+              <span class="label">Database: </span
+              >{{ normalizeSource(result.source) }}
+            </li>
           </ul>
 
           <h3 v-if="result.subjects" class="section-title">Subject:</h3>
@@ -173,6 +176,9 @@ export default {
           this.status.error_title = "An unknown error occured.";
         }
       }
+    },
+    normalizeSource: function (source) {
+      return source == "MIT Aleph" ? "MIT Barton Catalog" : source;
     },
   },
   created() {

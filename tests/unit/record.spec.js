@@ -239,3 +239,137 @@ describe("invalid timdex record", () => {
     });
   });
 });
+
+describe("record metadata display", () => {
+  it("normalizes MIT Aleph source to MIT Barton Catalog", async () => {
+    mockResponse = {
+      status: 200,
+      data: {
+        id: "002574584",
+        title: "Cheese",
+        source: "MIT Aleph",
+      },
+    };
+
+    axios.get.mockImplementation(() => Promise.resolve(mockResponse));
+
+    const mockRoute = {
+      params: {
+        recordId: "002574584",
+      },
+    };
+    const mockRouter = {
+      push: jest.fn(),
+    };
+
+    const wrapper = mount(Record, {
+      global: {
+        mocks: {
+          $route: mockRoute,
+          $router: mockRouter,
+        },
+      },
+    });
+
+    expect(axios.get).toHaveBeenCalledTimes(1);
+
+    expect(axios.get).toHaveBeenCalledWith(
+      "https://timdex.example.com/api/v1/record/002574584"
+    );
+
+    expect(wrapper.vm.$data.status.loading).toBe(true);
+
+    await wrapper.vm.$nextTick(() => {
+      expect(wrapper.vm.$data.status.loading).toBe(false);
+      expect(wrapper.text()).toMatch("Database: MIT Barton Catalog");
+    });
+  });
+
+  it("does not attempt to normalize DSpace@MIT source", async () => {
+    mockResponse = {
+      status: 200,
+      data: {
+        id: "002574584",
+        title: "Cheese",
+        source: "DSpace@MIT",
+      },
+    };
+
+    axios.get.mockImplementation(() => Promise.resolve(mockResponse));
+
+    const mockRoute = {
+      params: {
+        recordId: "002574584",
+      },
+    };
+    const mockRouter = {
+      push: jest.fn(),
+    };
+
+    const wrapper = mount(Record, {
+      global: {
+        mocks: {
+          $route: mockRoute,
+          $router: mockRouter,
+        },
+      },
+    });
+
+    expect(axios.get).toHaveBeenCalledTimes(1);
+
+    expect(axios.get).toHaveBeenCalledWith(
+      "https://timdex.example.com/api/v1/record/002574584"
+    );
+
+    expect(wrapper.vm.$data.status.loading).toBe(true);
+
+    await wrapper.vm.$nextTick(() => {
+      expect(wrapper.vm.$data.status.loading).toBe(false);
+      expect(wrapper.text()).toMatch("Database: DSpace@MIT");
+    });
+  });
+
+  it("does not attempt to normalize MIT ArchivesSpace source", async () => {
+    mockResponse = {
+      status: 200,
+      data: {
+        id: "002574584",
+        title: "Cheese",
+        source: "MIT ArchivesSpace",
+      },
+    };
+
+    axios.get.mockImplementation(() => Promise.resolve(mockResponse));
+
+    const mockRoute = {
+      params: {
+        recordId: "002574584",
+      },
+    };
+    const mockRouter = {
+      push: jest.fn(),
+    };
+
+    const wrapper = mount(Record, {
+      global: {
+        mocks: {
+          $route: mockRoute,
+          $router: mockRouter,
+        },
+      },
+    });
+
+    expect(axios.get).toHaveBeenCalledTimes(1);
+
+    expect(axios.get).toHaveBeenCalledWith(
+      "https://timdex.example.com/api/v1/record/002574584"
+    );
+
+    expect(wrapper.vm.$data.status.loading).toBe(true);
+
+    await wrapper.vm.$nextTick(() => {
+      expect(wrapper.vm.$data.status.loading).toBe(false);
+      expect(wrapper.text()).toMatch("Database: MIT ArchivesSpace");
+    });
+  });
+});

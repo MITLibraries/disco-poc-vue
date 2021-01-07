@@ -20,7 +20,9 @@
       </li>
     </ul>
     <p v-if="result.source_link">
-      <a :href="result.source_link">View in {{ result.source || "source" }}</a>
+      <a :href="result.source_link"
+        >View in {{ normalizeSource(result.source) || "source" }}</a
+      >
     </p>
   </div>
 </template>
@@ -28,11 +30,14 @@
 <script>
 export default {
   name: "Item",
-  components: {},
   props: {
     result: Object,
   },
-  computed: {},
+  methods: {
+    normalizeSource: function (source) {
+      return source == "MIT Aleph" ? "MIT Barton Catalog" : source;
+    },
+  },
 };
 </script>
 
