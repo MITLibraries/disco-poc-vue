@@ -406,4 +406,74 @@ describe("Results.vue", () => {
       expect(wrapper.text()).toMatch("Literary form");
     });
   });
+
+  it("sets per_page to 20 if nothing is specified or defined", async () => {
+    mockResponse = {
+      status: 200,
+      data: {
+        hits: 0,
+        results: [],
+      },
+    };
+
+    axios.get.mockImplementation(() => Promise.reject(mockResponse));
+
+    const mockRoute = {
+      query: {
+        q: "cheese",
+      },
+    };
+    const mockRouter = {
+      push: jest.fn(),
+    };
+
+    const wrapper = mount(Results, {
+      global: {
+        mocks: {
+          $route: mockRoute,
+          $router: mockRouter,
+        },
+      },
+    });
+
+    delete process.env.VUE_APP_RESULTS_PER_PAGE;
+
+    expect(wrapper.vm.per_page).toEqual(20);
+  });
+
+  it("sets per_page based on an env var over the default", async () => {
+    mockResponse = {
+      status: 200,
+      data: {
+        hits: 0,
+        results: [],
+      },
+    };
+
+    axios.get.mockImplementation(() => Promise.reject(mockResponse));
+
+    const mockRoute = {
+      query: {
+        q: "cheese",
+      },
+    };
+    const mockRouter = {
+      push: jest.fn(),
+    };
+
+    const wrapper = mount(Results, {
+      global: {
+        mocks: {
+          $route: mockRoute,
+          $router: mockRouter,
+        },
+      },
+    });
+
+    // We explicitly set this here because we cannot trust what you have set
+    // in env.
+    process.env.VUE_APP_RESULTS_PER_PAGE = 7;
+
+    expect(wrapper.vm.per_page).toEqual(7);
+  });
 });
