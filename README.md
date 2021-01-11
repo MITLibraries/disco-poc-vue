@@ -17,6 +17,7 @@ This repository will focus on the `DISCO UI` portion of this work.
 ### Optional
 
 `VUE_APP_SENTRY_DSN`: set to Sentry project key to log exceptions
+`VUE_APP_RESULTS_PER_PAGE`: determines how many results are seen on one page. Defauls to 20 if not set.
 
 ## Project setup
 

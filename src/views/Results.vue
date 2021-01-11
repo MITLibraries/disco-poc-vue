@@ -21,7 +21,11 @@
       </Facet>
     </div>
     <div v-bind:class="contentClass" v-if="this.status.loading == false">
-      <SearchMetadata v-model:searchterm="searchterm" v-model:hits="hits" />
+      <SearchMetadata
+        v-model:searchterm="searchterm"
+        v-model:hits="hits"
+        v-model:per_page="per_page"
+      />
       <div v-if="hits == 0">
         <p>Sorry, no results found for {{ searchterm }}.</p>
       </div>
@@ -59,7 +63,6 @@ export default {
       page: this.$route.query.page || "1",
       results: [],
       facetLists: [],
-      per_page: 20,
       status: {
         error_message: "",
         errored: false,
@@ -76,6 +79,12 @@ export default {
     },
     showSidebar: function () {
       return this.facetLists ? true : false;
+    },
+    per_page: function () {
+      if (process.env.VUE_APP_RESULTS_PER_PAGE) {
+        return parseInt(process.env.VUE_APP_RESULTS_PER_PAGE);
+      }
+      return 20;
     },
   },
   methods: {

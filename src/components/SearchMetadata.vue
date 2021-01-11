@@ -13,6 +13,7 @@ export default {
   name: "SearchMetadata",
   props: {
     hits: Number,
+    per_page: Number,
     searchterm: String,
   },
   methods: {
@@ -22,14 +23,11 @@ export default {
       }
       return 1;
     },
-    per_page() {
-      return 20;
-    },
     start() {
-      return this.per_page() * (this.page() - 1) + 1;
+      return parseInt(this.per_page) * (this.page() - 1) + 1;
     },
     end() {
-      return Math.min(this.page() * this.per_page(), this.hits);
+      return Math.min(this.page() * parseInt(this.per_page), this.hits);
     },
   },
 };

@@ -11,6 +11,7 @@ describe("SearchMetadata.vue", () => {
     };
 
     const hits = 6021023;
+    const per_page = 20;
     const searchterm = "new message";
     const wrapper = shallowMount(SearchMetadata, {
       global: {
@@ -19,7 +20,7 @@ describe("SearchMetadata.vue", () => {
           $router: mockRouter,
         },
       },
-      props: { hits, searchterm },
+      props: { hits, per_page, searchterm },
     });
 
     expect(wrapper.text()).toMatch("Search Results");
@@ -37,6 +38,7 @@ describe("SearchMetadata.vue", () => {
     };
 
     const hits = 49;
+    const per_page = 20;
     const wrapper = shallowMount(SearchMetadata, {
       global: {
         mocks: {
@@ -45,7 +47,7 @@ describe("SearchMetadata.vue", () => {
         },
       },
 
-      props: { hits },
+      props: { hits, per_page },
     });
 
     expect(wrapper.text()).toMatch("Viewing records 21 to 40 of " + hits);
@@ -60,6 +62,7 @@ describe("SearchMetadata.vue", () => {
     };
 
     const hits = 7;
+    const per_page = 20;
     const wrapper = shallowMount(SearchMetadata, {
       global: {
         mocks: {
@@ -68,7 +71,7 @@ describe("SearchMetadata.vue", () => {
         },
       },
 
-      props: { hits },
+      props: { hits, per_page },
     });
 
     expect(wrapper.text()).toMatch("Viewing records 1 to 7 of " + hits);
@@ -83,6 +86,7 @@ describe("SearchMetadata.vue", () => {
     };
 
     const hits = 38;
+    const per_page = 20;
     const wrapper = shallowMount(SearchMetadata, {
       global: {
         mocks: {
@@ -91,7 +95,7 @@ describe("SearchMetadata.vue", () => {
         },
       },
 
-      props: { hits },
+      props: { hits, per_page },
     });
 
     expect(wrapper.text()).toMatch("Viewing records 21 to 38 of " + hits);
@@ -106,6 +110,7 @@ describe("SearchMetadata.vue", () => {
     };
 
     const hits = 38;
+    const per_page = 20;
     const wrapper = shallowMount(SearchMetadata, {
       global: {
         mocks: {
@@ -114,7 +119,7 @@ describe("SearchMetadata.vue", () => {
         },
       },
 
-      props: { hits },
+      props: { hits, per_page },
     });
     expect(wrapper.text()).toMatch("Viewing records 1 to 20 of " + hits);
   });
