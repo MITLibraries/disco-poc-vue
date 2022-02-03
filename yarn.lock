@@ -1102,14 +1102,14 @@
     "@sentry/utils" "5.30.0"
     tslib "^1.9.3"
 
-"@sentry/integrations@^5.26.0":
-  version "5.30.0"
-  resolved "https://registry.yarnpkg.com/@sentry/integrations/-/integrations-5.30.0.tgz#2f25fb998cb19c76b3803d84c1a577b3d837010f"
-  integrity sha512-Fqh4ALLoQWdd+1ih0iBduANWFyNmFWMxwvBu3V/wLDRi8OcquI0lEzWai1InzTJTiNhRHPnhuU++l/vkO0OCww==
+"@sentry/integrations@^6.17.4":
+  version "6.17.4"
+  resolved "https://registry.yarnpkg.com/@sentry/integrations/-/integrations-6.17.4.tgz#a894526ce25020aea1dc9b2f2a4aa584c7de9b3a"
+  integrity sha512-NmFbv9w4AK1d4NYi0beTuJgn6t81bdiGZmkNZ9VKVI0mBfoZfwxIo7fGNrla3HMkeTwLHntXuzUu4v+w1EARqA==
   dependencies:
-    "@sentry/types" "5.30.0"
-    "@sentry/utils" "5.30.0"
-    localforage "1.8.1"
+    "@sentry/types" "6.17.4"
+    "@sentry/utils" "6.17.4"
+    localforage "^1.8.1"
     tslib "^1.9.3"
 
 "@sentry/minimal@5.30.0":
@@ -1137,12 +1137,25 @@
   resolved "https://registry.yarnpkg.com/@sentry/types/-/types-5.30.0.tgz#19709bbe12a1a0115bc790b8942917da5636f402"
   integrity sha512-R8xOqlSTZ+htqrfteCWU5Nk0CDN5ApUTvrlvBuiH1DyP6czDZ4ktbZB0hAgBlVcK0U+qpD3ag3Tqqpa5Q67rPw==
 
+"@sentry/types@6.17.4":
+  version "6.17.4"
+  resolved "https://registry.yarnpkg.com/@sentry/types/-/types-6.17.4.tgz#36b78d7c4a6de19b2bbc631bb34893bcad30c0ba"
+  integrity sha512-RUyiXCKf61k2GIMP7FQX0naoSew4zLxe+UrtbjwVcWU4AFPZfH7tLNtTpVE85zAKbxsaiq3OD2FPtTZarHcwxQ==
+
 "@sentry/utils@5.30.0":
   version "5.30.0"
   resolved "https://registry.yarnpkg.com/@sentry/utils/-/utils-5.30.0.tgz#9a5bd7ccff85ccfe7856d493bffa64cabc41e980"
   integrity sha512-zaYmoH0NWWtvnJjC9/CBseXMtKHm/tm40sz3YfJRxeQjyzRqNQPgivpd9R/oDJCYj999mzdW382p/qi2ypjLww==
   dependencies:
     "@sentry/types" "5.30.0"
+    tslib "^1.9.3"
+
+"@sentry/utils@6.17.4":
+  version "6.17.4"
+  resolved "https://registry.yarnpkg.com/@sentry/utils/-/utils-6.17.4.tgz#4f109629d2e7f16c5595b4367445ef47bfe96b61"
+  integrity sha512-+ENzZbrlVL1JJ+FoK2EOS27nbA/yToeaJPFlyVOnbthUxVyN3TTi9Uzn9F05fIE/2BTkOEk89wPtgcHafgrD6A==
+  dependencies:
+    "@sentry/types" "6.17.4"
     tslib "^1.9.3"
 
 "@soda/friendly-errors-webpack-plugin@^1.7.1":
@@ -6804,10 +6817,10 @@ loader-utils@^2.0.0:
     emojis-list "^3.0.0"
     json5 "^2.1.2"
 
-localforage@1.8.1:
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/localforage/-/localforage-1.8.1.tgz#f6c0a24b41ab33b10e4dc84342dd696f6f3e3433"
-  integrity sha512-azSSJJfc7h4bVpi0PGi+SmLQKJl2/8NErI+LhJsrORNikMZnhaQ7rv9fHj+ofwgSHrKRlsDCL/639a6nECIKuQ==
+localforage@^1.8.1:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/localforage/-/localforage-1.10.0.tgz#5c465dc5f62b2807c3a84c0c6a1b1b3212781dd4"
+  integrity sha512-14/H1aX7hzBBmmh7sGPd+AOMkkIrHM3Z1PAyGgZigA1H1p5O5ANnMyWzvpAETtG68/dC4pC0ncy3+PPGzXZHPg==
   dependencies:
     lie "3.1.1"
 
